@@ -1,0 +1,1281 @@
+/* ==========================================
+   PDS-006 - Medical/Hospital Professional Design
+   Universidad Santo Tomás
+   ========================================== */
+
+/* ========== Variables CSS - Medical Theme ========== */
+:root {
+  /* Colores principales - Paleta médica profesional */
+  --usta-primary: #c8102e;
+  --usta-primary-dark: #9a0c23;
+  --usta-primary-light: #e61b3a;
+  --medical-blue: #0077be;
+  --medical-blue-dark: #005a8f;
+  --medical-teal: #00a896;
+  --medical-green: #05c46b;
+  
+  /* Colores secundarios */
+  --usta-secondary: #1a1a1a;
+  --accent-gold: #d4af37;
+  --accent-silver: #c0c0c0;
+  
+  /* Colores de estado médicos */
+  --color-success: #05c46b;
+  --color-danger: #ee5a6f;
+  --color-warning: #ffc048;
+  --color-info: #4fc3f7;
+  --color-critical: #ff5252;
+  
+  /* Grises premium */
+  --white: #ffffff;
+  --gray-50: #f8f9fb;
+  --gray-100: #f1f3f6;
+  --gray-200: #e4e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Espaciado refinado */
+  --spacing-xs: 0.375rem;
+  --spacing-sm: 0.625rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.75rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 3.5rem;
+  
+  /* Bordes sofisticados */
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  --border-radius-2xl: 1.5rem;
+  --border-radius-full: 9999px;
+  
+  /* Sombras premium */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px 0 rgba(0, 0, 0, 0.15);
+  --shadow-2xl: 0 24px 64px 0 rgba(0, 0, 0, 0.18);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Sombras de color */
+  --shadow-primary: 0 8px 24px 0 rgba(200, 16, 46, 0.15);
+  --shadow-success: 0 8px 24px 0 rgba(5, 196, 107, 0.15);
+  --shadow-info: 0 8px 24px 0 rgba(79, 195, 247, 0.15);
+  
+  /* Transiciones suaves */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Fuentes */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+  
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* ========== Reset Mejorado ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--gray-800);
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== Header Superior Premium ========== */
+header.bg-white {
+  background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  backdrop-filter: blur(20px);
+  transition: all var(--transition-base);
+}
+
+header.bg-white:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.usta-logo {
+  max-height: 52px;
+  width: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+  transition: all var(--transition-base);
+}
+
+.usta-logo:hover {
+  transform: scale(1.05) translateY(-2px);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+}
+
+.usta-logo:active {
+  transform: scale(0.98);
+}
+
+header .fw-semibold {
+  color: var(--usta-primary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+header .text-muted {
+  color: var(--gray-600) !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Información PDS-006 en header */
+header .text-end .fw-semibold {
+  font-size: 1.125rem;
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Navegación Principal Premium ========== */
+.navbar {
+  background: white !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-sticky) - 1);
+  backdrop-filter: blur(20px);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--usta-primary) !important;
+  letter-spacing: -0.02em;
+  transition: all var(--transition-fast);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-md);
+}
+
+.navbar-brand:hover {
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateY(-1px);
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--gray-700) !important;
+  padding: 0.75rem 1.25rem !important;
+  margin: 0 0.25rem;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(200, 16, 46, 0.05) 0%, rgba(200, 16, 46, 0.08) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: -1;
+}
+
+.nav-link:hover {
+  color: var(--usta-primary) !important;
+  background: var(--gray-50);
+  transform: translateY(-1px);
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+}
+
+.nav-link.active {
+  color: white !important;
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-dark) 100%);
+  font-weight: 600;
+  box-shadow: var(--shadow-primary);
+}
+
+.nav-link.active::after {
+  display: none;
+}
+
+/* ========== Dropdown Menus Premium ========== */
+.dropdown-menu {
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--border-radius-lg);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  background: white;
+  backdrop-filter: blur(20px);
+  animation: fadeInUp var(--transition-base);
+  overflow: hidden;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, var(--usta-primary) 0%, var(--usta-primary-light) 100%);
+  transition: height var(--transition-base);
+  border-radius: 0 2px 2px 0;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(90deg, rgba(200, 16, 46, 0.05) 0%, rgba(200, 16, 46, 0.02) 100%);
+  color: var(--usta-primary);
+  padding-left: 1.25rem;
+}
+
+.dropdown-item:hover::before {
+  height: 60%;
+}
+
+.dropdown-item:active {
+  background: linear-gradient(90deg, rgba(200, 16, 46, 0.08) 0%, rgba(200, 16, 46, 0.04) 100%);
+}
+
+.dropdown-item.active {
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-dark) 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.dropdown-item.active::before {
+  display: none;
+}
+
+.dropdown-divider {
+  margin: 0.5rem 0;
+  border-color: var(--gray-200);
+  opacity: 1;
+}
+
+.dropdown-header {
+  padding: 0.75rem 1rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--gray-500);
+}
+
+/* ========== Sistema de Notificaciones Premium ========== */
+.toast-stack {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 420px;
+  pointer-events: none;
+}
+
+.toast-stack > * {
+  pointer-events: auto;
+}
+
+.toast {
+  border: none;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-2xl);
+  animation: slideInRight var(--transition-slow);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.toast::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--usta-primary) 0%, var(--medical-teal) 100%);
+}
+
+.toast-header {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 251, 0.95) 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+}
+
+.toast-body {
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.98);
+}
+
+/* Badge de notificaciones con pulso */
+#notifBadge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 0 5px;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  transform: translate(-90%, -10%);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-90%, -10%) scale(1);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+  }
+  50% {
+    transform: translate(-90%, -10%) scale(1.15);
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.6);
+  }
+}
+
+/* Icono de campana mejorado */
+.nav-link .bi-bell {
+  font-size: 1.35rem;
+  transition: all var(--transition-base);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.nav-link:hover .bi-bell {
+  transform: rotate(15deg) scale(1.1);
+  color: var(--usta-primary);
+}
+
+/* Dropdown de notificaciones */
+#notifList > div {
+  padding: 1rem !important;
+  transition: all var(--transition-fast);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 0.5rem;
+}
+
+#notifList > div:hover {
+  background: linear-gradient(90deg, rgba(200, 16, 46, 0.03) 0%, transparent 100%);
+  transform: translateX(4px);
+}
+
+#notifList .border-bottom {
+  border-color: var(--gray-200) !important;
+}
+
+#notifList .border-bottom:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0;
+}
+
+/* ========== Botones Premium ========== */
+.btn {
+  font-weight: 600;
+  border-radius: var(--border-radius-lg);
+  padding: 0.625rem 1.5rem;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.01em;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-dark) 100%);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--usta-primary-dark) 0%, #7a0819 100%);
+  box-shadow: 0 12px 32px 0 rgba(200, 16, 46, 0.25);
+}
+
+.btn-outline-secondary {
+  border: 2px solid var(--gray-300);
+  background: white;
+  color: var(--gray-700);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--gray-700);
+  border-color: var(--gray-700);
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+/* ========== Cards Premium con Glassmorphism ========== */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-slow);
+  overflow: hidden;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--usta-primary) 0%, var(--medical-teal) 50%, var(--medical-blue) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2xl);
+  border-color: rgba(200, 16, 46, 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  background: linear-gradient(135deg, rgba(248, 249, 251, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gray-200);
+  font-weight: 600;
+  padding: 1.25rem 1.5rem;
+  color: var(--gray-800);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Cards de acceso rápido del dashboard */
+.card.border {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card.border::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(200, 16, 46, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.card.border:hover::after {
+  opacity: 1;
+}
+
+/* Iconos en cards */
+.card .bi {
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--medical-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform var(--transition-base);
+}
+
+.card:hover .bi {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* ========== Badge de Rol Premium ========== */
+.badge {
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-radius: var(--border-radius-full);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge.bg-danger {
+  background: linear-gradient(135deg, #ee5a6f 0%, #c8102e 100%) !important;
+}
+
+/* ========== Tablas Profesionales ========== */
+.table {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: white;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+  border-bottom: 2px solid var(--gray-300);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+  padding: 1.25rem 1rem;
+  color: var(--gray-700);
+}
+
+.table tbody tr {
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.table tbody tr:hover {
+  background: linear-gradient(90deg, rgba(200, 16, 46, 0.02) 0%, transparent 100%);
+  transform: scale(1.01);
+  box-shadow: var(--shadow-sm);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(248, 249, 251, 0.5);
+}
+
+/* ========== Formularios Premium ========== */
+.form-control,
+.form-select {
+  border: 2px solid var(--gray-200);
+  border-radius: var(--border-radius-lg);
+  padding: 0.75rem 1rem;
+  transition: all var(--transition-base);
+  background: white;
+  font-weight: 500;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--usta-primary);
+  box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.1);
+  background: white;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--gray-700);
+  font-size: 0.9375rem;
+}
+
+.form-text {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* ========== Alerts Premium ========== */
+.alert {
+  border-radius: var(--border-radius-xl);
+  border: none;
+  border-left: 4px solid;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, rgba(5, 196, 107, 0.1) 0%, rgba(5, 196, 107, 0.05) 100%);
+  border-left-color: var(--color-success);
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, rgba(238, 90, 111, 0.1) 0%, rgba(238, 90, 111, 0.05) 100%);
+  border-left-color: var(--color-danger);
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, rgba(255, 192, 72, 0.1) 0%, rgba(255, 192, 72, 0.05) 100%);
+  border-left-color: var(--color-warning);
+}
+
+.alert-info {
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.1) 0%, rgba(79, 195, 247, 0.05) 100%);
+  border-left-color: var(--color-info);
+}
+
+/* ========== Footer Premium ========== */
+footer {
+  background: linear-gradient(to top, white 0%, var(--gray-50) 100%) !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
+  border-top: 1px solid var(--gray-200);
+}
+
+footer .bi {
+  margin-right: var(--spacing-xs);
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--medical-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Sección de Bienvenida Premium ========== */
+.card .bi-person-circle {
+  font-size: 3rem;
+  color: var(--medical-blue);
+}
+
+/* Icono de escudo de seguridad */
+.bi-shield-check,
+.bi-shield-lock {
+  color: var(--medical-green);
+}
+
+/* ========== Scrollbar Premium ========== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: var(--border-radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gray-400) 0%, var(--gray-500) 100%);
+  border-radius: var(--border-radius-full);
+  border: 2px solid var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--usta-primary) 0%, var(--usta-primary-dark) 100%);
+}
+
+/* ========== Utilidades Premium ========== */
+
+/* Loading spinner mejorado */
+.spinner-border {
+  border-width: 0.2em;
+}
+
+.spinner-border-sm {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-width: 0.15em;
+}
+
+/* Enlaces premium */
+a {
+  color: var(--usta-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--usta-primary-dark);
+  text-decoration: none;
+}
+
+/* Separadores elegantes */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gray-300) 50%, transparent 100%);
+  opacity: 1;
+  margin: var(--spacing-lg) 0;
+}
+
+/* ========== Estados de Carga Premium ========== */
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--gray-200);
+  border-top-color: var(--usta-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ========== Responsive Premium ========== */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 251, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--gray-200);
+  }
+  
+  .nav-link {
+    margin: 0.25rem 0;
+  }
+  
+  .dropdown-menu {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    margin-left: var(--spacing-md);
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --spacing-lg: 1.25rem;
+    --spacing-xl: 1.75rem;
+  }
+  
+  .toast-stack {
+    left: 1rem;
+    right: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  header .container {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .usta-logo {
+    max-height: 44px;
+  }
+  
+  header .text-end {
+    text-align: left !important;
+    margin-top: var(--spacing-sm);
+  }
+  
+  .card {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 575.98px) {
+  :root {
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+  }
+  
+  .container {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+  
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.125rem;
+  }
+}
+
+/* ========== Accesibilidad Premium ========== */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  background: var(--usta-primary);
+  color: white;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 9999;
+  border-radius: 0 0 var(--border-radius-md) 0;
+  box-shadow: var(--shadow-lg);
+  transition: top var(--transition-base);
+}
+
+.skip-link:focus {
+  top: 0;
+  color: white;
+}
+
+/* Focus visible premium */
+*:focus-visible {
+  outline: 3px solid var(--usta-primary);
+  outline-offset: 3px;
+  border-radius: var(--border-radius-sm);
+}
+
+button:focus-visible,
+.btn:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ========== Animaciones Adicionales ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Aplicar animaciones a elementos principales */
+.card {
+  animation: scaleIn var(--transition-slow) ease-out;
+}
+
+.alert {
+  animation: slideDown var(--transition-base) ease-out;
+}
+
+main > .container > * {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* ========== Mejoras Específicas para Dashboard ========== */
+
+/* Sección de bienvenida */
+.card:has(.bi-person-circle) {
+  background: linear-gradient(135deg, rgba(200, 16, 46, 0.02) 0%, rgba(0, 119, 190, 0.02) 100%);
+  border: 2px solid rgba(200, 16, 46, 0.1);
+}
+
+.card:has(.bi-person-circle):hover {
+  border-color: rgba(200, 16, 46, 0.2);
+  background: linear-gradient(135deg, rgba(200, 16, 46, 0.04) 0%, rgba(0, 119, 190, 0.04) 100%);
+}
+
+/* Cards de acceso rápido con bordes de color */
+.card.border-primary {
+  border-color: rgba(200, 16, 46, 0.2) !important;
+  border-width: 2px !important;
+}
+
+.card.border-success {
+  border-color: rgba(5, 196, 107, 0.2) !important;
+  border-width: 2px !important;
+}
+
+.card.border-info {
+  border-color: rgba(0, 119, 190, 0.2) !important;
+  border-width: 2px !important;
+}
+
+.card.border-warning {
+  border-color: rgba(255, 192, 72, 0.2) !important;
+  border-width: 2px !important;
+}
+
+/* Títulos de secciones con íconos */
+h2, h3, h4 {
+  font-weight: 700;
+  color: var(--gray-800);
+  letter-spacing: -0.02em;
+}
+
+h2 .bi, h3 .bi, h4 .bi {
+  margin-right: var(--spacing-sm);
+  vertical-align: middle;
+}
+
+/* Lista de notificaciones */
+.list-group-item {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: var(--spacing-sm);
+  transition: all var(--transition-base);
+  background: white;
+}
+
+.list-group-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--usta-primary);
+}
+
+/* ========== Iconos de Bootstrap con Gradientes ========== */
+.text-primary .bi,
+.text-danger .bi,
+.text-success .bi,
+.text-info .bi,
+.text-warning .bi {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Iconos específicos por contexto */
+.bi-laptop,
+.bi-pc-display,
+.bi-hospital {
+  background: linear-gradient(135deg, var(--medical-blue) 0%, var(--medical-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bi-file-earmark-text,
+.bi-graph-up {
+  background: linear-gradient(135deg, var(--medical-green) 0%, var(--medical-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bi-person,
+.bi-people {
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bi-building,
+.bi-briefcase {
+  background: linear-gradient(135deg, var(--gray-600) 0%, var(--gray-800) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Efectos de Glassmorphism ========== */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* ========== Utilidades de Color Premium ========== */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-dark) 100%) !important;
+  color: white;
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, var(--color-success) 0%, #04a659 100%) !important;
+  color: white;
+}
+
+.bg-gradient-info {
+  background: linear-gradient(135deg, var(--medical-blue) 0%, var(--medical-blue-dark) 100%) !important;
+  color: white;
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, var(--color-warning) 0%, #ffb020 100%) !important;
+  color: var(--gray-800);
+}
+
+/* ========== Borders Premium ========== */
+.border-gradient {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--medical-blue) 100%);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* ========== Text Utilities Premium ========== */
+.text-gradient-primary {
+  background: linear-gradient(135deg, var(--usta-primary) 0%, var(--usta-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-medical {
+  background: linear-gradient(135deg, var(--medical-blue) 0%, var(--medical-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Sombras Personalizadas por Contexto ========== */
+.shadow-primary {
+  box-shadow: var(--shadow-primary) !important;
+}
+
+.shadow-success {
+  box-shadow: var(--shadow-success) !important;
+}
+
+.shadow-info {
+  box-shadow: var(--shadow-info) !important;
+}
+
+/* ========== Espaciado Gap Utilities ========== */
+.gap-xs { gap: var(--spacing-xs) !important; }
+.gap-sm { gap: var(--spacing-sm) !important; }
+.gap-md { gap: var(--spacing-md) !important; }
+.gap-lg { gap: var(--spacing-lg) !important; }
+.gap-xl { gap: var(--spacing-xl) !important; }
+.gap-2xl { gap: var(--spacing-2xl) !important; }
+
+/* ========== Estados Hover Utilities ========== */
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* ========== Modo Impresión Premium ========== */
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  .navbar,
+  .toast-stack,
+  footer,
+  .btn,
+  .no-print,
+  #notifBadge,
+  .dropdown-toggle {
+    display: none !important;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid var(--gray-300) !important;
+    page-break-inside: avoid;
+  }
+  
+  header {
+    position: static !important;
+    box-shadow: none !important;
+    border-bottom: 2px solid var(--gray-800) !important;
+  }
+  
+  .usta-logo {
+    filter: none !important;
+  }
+  
+  a {
+    text-decoration: underline !important;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: var(--gray-600);
+  }
+}
+
+/* ========== Reducción de Movimiento ========== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .usta-logo:hover,
+  .card:hover,
+  .btn:hover,
+  .nav-link:hover {
+    transform: none !important;
+  }
+}
+
+/* ========== Modo Alto Contraste ========== */
+@media (prefers-contrast: high) {
+  :root {
+    --gray-300: #999;
+    --gray-400: #777;
+    --gray-500: #555;
+  }
+  
+  .card {
+    border-width: 2px;
+    border-color: var(--gray-800);
+  }
+  
+  .btn {
+    border: 2px solid currentColor;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* ========== Mejoras de Performance ========== */
+.card,
+.btn,
+.nav-link,
+.dropdown-item {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ========== Fin de Estilos Premium ========== */
