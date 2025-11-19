@@ -4,7 +4,7 @@ import psycopg
 
 load_dotenv()
 
-dsn = os.getenv("PSYCOPG_DSN") or "postgresql://postgres:usTa202510.@db.jfqrpfgjnquepxdwovbg.supabase.co:5432/postgres"
+dsn = os.getenv("PSYCOPG_DSN") or "postgresql://postgres:Aveztru89**@db.adjgnctknbmzyjkdzgtp.supabase.co:5432/postgres"
 
 try:
     with psycopg.connect(dsn, sslmode="require") as conn:

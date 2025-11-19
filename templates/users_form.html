@@ -1,48 +1,91 @@
 {% extends "base.html" %}
 {% block title %}{{ 'Editar usuario' if is_edit else 'Nuevo usuario' }}{% endblock %}
+
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-md-8 col-lg-6">
-    <div class="card shadow">
+    <div class="card shadow-sm border-0">
       <div class="card-body">
         <h3 class="mb-3">{{ 'Editar usuario' if is_edit else 'Nuevo usuario' }}</h3>
 
         <form method="POST" novalidate>
           {{ form.hidden_tag() }}
 
+          {# Bloqueo de cambio de rol si el admin se está editando a sí mismo #}
+          {% set lock_role = is_edit and user and user.id == current_user.id and current_user.role == 'admin' %}
+
+          <!-- Usuario -->
           <div class="mb-3">
             <label class="form-label" for="{{ form.username.id }}">{{ form.username.label }}</label>
-            {{ form.username(class="form-control") }}
+            {{ form.username(
+                class="form-control" + (' is-invalid' if form.username.errors else ''),
+                id=form.username.id
+            ) }}
+            {% for err in form.username.errors %}
+              <div class="invalid-feedback d-block">{{ err }}</div>
+            {% endfor %}
           </div>
 
+          <!-- Identificación -->
           <div class="mb-3">
             <label class="form-label" for="{{ form.identificacion.id }}">{{ form.identificacion.label }}</label>
-            {{ form.identificacion(class="form-control") }}
+            {{ form.identificacion(
+                class="form-control" + (' is-invalid' if form.identificacion.errors else ''),
+                id=form.identificacion.id
+            ) }}
+            {% for err in form.identificacion.errors %}
+              <div class="invalid-feedback d-block">{{ err }}</div>
+            {% endfor %}
           </div>
 
+          <!-- Correo -->
           <div class="mb-3">
             <label class="form-label" for="{{ form.email.id }}">{{ form.email.label }}</label>
-            {{ form.email(class="form-control") }}
+            {{ form.email(
+                class="form-control" + (' is-invalid' if form.email.errors else ''),
+                id=form.email.id
+            ) }}
+            {% for err in form.email.errors %}
+              <div class="invalid-feedback d-block">{{ err }}</div>
+            {% endfor %}
           </div>
 
+          <!-- Rol -->
           <div class="mb-3">
             <label class="form-label" for="{{ form.role.id }}">{{ form.role.label }}</label>
-            {% set lock_role = is_edit and user and user.id == current_user.id and current_user.role == 'admin' %}
             {% if lock_role %}
-              {{ form.role(class="form-select", disabled=True) }}
-              <div class="form-text">No puedes cambiar tu propio rol de administrador.</div>
+              {{ form.role(
+                  class="form-select",
+                  id=form.role.id,
+                  disabled=True
+              ) }}
+              <div class="form-text">
+                No puedes cambiar tu propio rol de administrador.
+              </div>
             {% else %}
-              {{ form.role(class="form-select") }}
+              {{ form.role(
+                  class="form-select" + (' is-invalid' if form.role.errors else ''),
+                  id=form.role.id
+              ) }}
             {% endif %}
+            {% for err in form.role.errors %}
+              <div class="invalid-feedback d-block">{{ err }}</div>
+            {% endfor %}
           </div>
 
-
+          <!-- Contraseña -->
           <div class="mb-3">
             <label class="form-label" for="{{ form.password.id }}">{{ form.password.label }}</label>
-            {{ form.password(class="form-control") }}
+            {{ form.password(
+                class="form-control" + (' is-invalid' if form.password.errors else ''),
+                id=form.password.id
+            ) }}
             {% if is_edit %}
               <div class="form-text">Déjalo vacío para no cambiar la contraseña.</div>
             {% endif %}
+            {% for err in form.password.errors %}
+              <div class="invalid-feedback d-block">{{ err }}</div>
+            {% endfor %}
           </div>
 
           <div class="d-flex gap-2">

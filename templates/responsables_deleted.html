@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Responsables eliminados{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-11">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="m-0">Responsables de entrega eliminados</h3>
+      <form class="d-flex gap-2" method="get" action="{{ url_for('responsables_eliminados') }}">
+        <input class="form-control"
+               name="q"
+               value="{{ q or '' }}"
+               placeholder="Buscar por ID, nombre, empresa, actor…">
+        <div class="btn-group">
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+          <a class="btn btn-outline-danger" href="{{ url_for('responsables_eliminados') }}">Limpiar</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped align-middle m-0">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>ID responsable</th>
+                <th>Nombre</th>
+                <th>Empresa</th>
+                <th>Actor</th>
+                <th>IP</th>
+                <th>Agente</th>
+                <th>Fecha eliminación</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in rows %}
+              <tr>
+                <td>{{ r.id }}</td>
+                <td><code class="small">{{ r.id_responsable }}</code></td>
+                <td>{{ r.nombre_responsable }}</td>
+                <td>{{ r.empresa_nombre or '—' }}</td>
+                <td>{{ r.actor.username if r.actor else '—' }}</td>
+                <td><small class="text-muted">{{ r.ip or '—' }}</small></td>
+                <td><small class="text-muted">{{ r.user_agent or '—' }}</small></td>
+                <td><small>{{ r.deleted_at }}</small></td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="8" class="text-center py-4 text-muted">No hay responsables eliminados.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    {% if total and total > size %}
+      {% set last_page = (total // size) + (1 if (total % size) else 0) %}
+      <nav class="mt-3">
+        <ul class="pagination pagination-sm mb-0">
+          <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('responsables_eliminados', q=q, page=page-1, size=size) }}">«</a>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link">Página {{ page }} de {{ last_page }}</span>
+          </li>
+          <li class="page-item {% if page >= last_page %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('responsables_eliminados', q=q, page=page+1, size=size) }}">»</a>
+          </li>
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

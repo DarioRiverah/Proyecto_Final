@@ -1,23 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Equipos{% endblock %}
+
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-lg-11">
+
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
       <h3 class="m-0">Equipos</h3>
 
       <form class="d-flex gap-2" method="get" action="{{ url_for('equipos_index') }}">
-        <input class="form-control" name="q" value="{{ q or '' }}" placeholder="Buscar código, marca, modelo, empresa…">
+        <input class="form-control"
+               name="q"
+               value="{{ q or '' }}"
+               placeholder="Buscar código, marca, modelo, empresa…">
         <div class="btn-group">
           <button class="btn btn-outline-primary" type="submit">Buscar</button>
           <a class="btn btn-outline-danger" href="{{ url_for('equipos_index') }}">Limpiar</a>
         </div>
       </form>
 
-            {% if current_user.role == 'admin' %}
-      <div class="d-flex gap-2">
+      {% if current_user.role == 'admin' %}
+      <div class="d-flex flex-wrap gap-2">
         <a class="btn btn-primary" href="{{ url_for('equipos_create') }}">Nuevo equipo</a>
 
+        <!-- Eliminar todos -->
         <form method="POST"
               action="{{ url_for('equipos_delete_all') }}"
               onsubmit="return confirm('⚠️ Esta acción eliminará TODOS los equipos registrados.\n\nNo se puede deshacer.\n\n¿Seguro que deseas continuar?');">
@@ -27,7 +33,7 @@
           </button>
         </form>
 
-        {#  Eliminar equipos que coinciden con el filtro actual #}
+        <!-- Eliminar filtrados -->
         <form method="POST"
               action="{{ url_for('equipos_delete_filtered') }}"
               onsubmit="return confirm('⚠️ Esta acción eliminará TODOS los equipos que coinciden con el filtro actual ({{ q or 'sin filtro' }}).\n\nNo se puede deshacer.\n\n¿Seguro que deseas continuar?');">
@@ -37,13 +43,11 @@
             <i class="bi bi-trash3"></i> Eliminar equipos filtrados
           </button>
         </form>
-
       </div>
       {% endif %}
-
     </div>
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm border-0">
       <div class="card-body p-0">
         <div class="table-responsive">
           <table class="table table-striped align-middle m-0">
@@ -67,20 +71,45 @@
                 <td><span class="badge text-bg-secondary">{{ e.tipo_equipo }}</span></td>
                 <td>{{ e.marca or '-' }} / {{ e.modelo or '-' }}</td>
                 <td>{{ e.empresa.nombre if e.empresa else '—' }}</td>
-                <td><span class="badge text-bg-info">{{ e.estado }}</span></td>
+                <td>
+                  {% if e.estado == 'aprobado' %}
+                    <span class="badge rounded-pill bg-success-subtle text-success-emphasis border border-success-subtle">
+                      {{ e.estado }}
+                      </span>
+                  {% elif e.estado in ['en_revision'] %}
+                    <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle">
+                      {{ e.estado }}
+                      </span>
+                  {% elif e.estado in ['pendiente'] %}
+                    <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis border border-warning-subtle">
+                      {{ e.estado }}
+                      </span>
+                  {% elif e.estado in ['rechazado', 'devuelto'] %}
+                    <span class="badge rounded-pill bg-danger-subtle text-danger-emphasis border border-danger-subtle">
+                      {{ e.estado }}
+                      </span>
+                  {% else %}
+                    <span class="badge text-bg-secondary">{{ e.estado }}</span>
+                  {% endif %}
+                </td>
                 <td><small>{{ e.fecha_ingreso }}</small></td>
                 <td class="text-end">
-                  <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('equipos_show', equipo_id=e.id) }}">Ver</a>
+                  <a class="btn btn-sm btn-outline-secondary"
+                     href="{{ url_for('equipos_show', equipo_id=e.id) }}">Ver</a>
                   {% if current_user.role == 'admin' %}
-                    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('equipos_edit', equipo_id=e.id) }}">Editar</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('audit_equipo_show', equipo_id=e.id) }}"> Auditoría </a>
+                    <a class="btn btn-sm btn-outline-primary"
+                       href="{{ url_for('equipos_edit', equipo_id=e.id) }}">Editar</a>
+                    <a class="btn btn-sm btn-outline-secondary"
+                       href="{{ url_for('audit_equipo_show', equipo_id=e.id) }}">
+                      Auditoría
+                    </a>
 
                     <form class="d-inline delete-equipo-form"
                           method="POST"
                           action="{{ url_for('equipos_delete', equipo_id=e.id) }}">
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-                      <!-- campos ocultos para validar el captcha en el backend -->
+                      <!-- campos ocultos para el captcha -->
                       <input type="hidden" name="cap_a">
                       <input type="hidden" name="cap_b">
                       <input type="hidden" name="cap_op">
@@ -88,16 +117,17 @@
 
                       <button type="button"
                               class="btn btn-sm btn-outline-danger"
-                              onclick="openDeleteEquipoModal(this, '{{ e.codigo_interno }}')">
+                              onclick="openDeleteEquipoModal(this, '{{ e.codigo_interno|e }}')">
                         Eliminar
                       </button>
                     </form>
-
                   {% endif %}
                 </td>
               </tr>
               {% else %}
-              <tr><td colspan="8" class="text-center py-4 text-muted">Sin resultados.</td></tr>
+              <tr>
+                <td colspan="8" class="text-center py-4 text-muted">Sin resultados.</td>
+              </tr>
               {% endfor %}
             </tbody>
           </table>
@@ -109,20 +139,19 @@
       <div class="text-muted small">Total: {{ total }}</div>
       <div class="btn-group">
         {% if page > 1 %}
-          <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('equipos_index', page=page-1, size=size, q=q) }}">« Anterior</a>
+          <a class="btn btn-outline-secondary btn-sm"
+             href="{{ url_for('equipos_index', page=page-1, size=size, q=q) }}">« Anterior</a>
         {% endif %}
         {% if page*size < total %}
-          <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('equipos_index', page=page+1, size=size, q=q) }}">Siguiente »</a>
+          <a class="btn btn-outline-secondary btn-sm"
+             href="{{ url_for('equipos_index', page=page+1, size=size, q=q) }}">Siguiente »</a>
         {% endif %}
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-<!-- Modal confirmación con operación -->
+<!-- Modal confirmación con patrón de colores -->
 <div class="modal fade" id="deleteEquipoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-wide">
     <div class="modal-content">
@@ -130,40 +159,60 @@
         <h5 class="modal-title">Confirmar eliminación</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
+
       <div class="modal-body">
-  <p class="mb-3">
-    Vas a eliminar el equipo <strong id="delete-equipo-code"></strong>.
-    Esta acción <strong>no se puede deshacer</strong>.
-  </p>
+        <p class="mb-3">
+          Vas a eliminar el equipo <strong id="delete-equipo-code"></strong>.
+          Esta acción <strong>no se puede deshacer</strong>.
+        </p>
 
-  <p class="mb-3">
-    Para confirmar, resuelve la siguiente operación:
-  </p>
+        <p class="mb-2">
+          Para confirmar, sigue el siguiente patrón de colores:
+        </p>
 
-  <!-- Caja bonita para la operación -->
-  <div class="text-center mb-3">
-    <div class="small text-muted mb-1">Operación de seguridad</div>
-    <div class="captcha-op d-inline-flex align-items-center justify-content-center">
-      <span id="delete-captcha-op"></span>
-      <span class="ms-1">= ?</span>
-    </div>
-  </div>
+        <!-- Patrón a seguir -->
+        <div class="text-center mb-3">
+          <div class="small text-muted mb-1">Patrón objetivo</div>
+          <div class="captcha-pattern d-inline-flex align-items-center justify-content-center">
+            <span id="delete-captcha-pattern"></span>
+          </div>
+        </div>
 
-  <!-- Input centrado -->
-  <div class="d-flex justify-content-center mb-2">
-    <input id="delete-captcha-input"
-           type="number"
-           class="form-control form-control-sm text-center captcha-input"
-           placeholder="Escribe el resultado">
-  </div>
+        <!-- Botones de colores para hacer clic -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Haz clic en los colores en el mismo orden</div>
+          <div class="d-inline-flex gap-2 flex-wrap justify-content-center">
+            <button type="button" class="btn btn-sm btn-outline-danger pattern-btn" data-color="red">
+              🔴 Rojo
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-success pattern-btn" data-color="green">
+              🟢 Verde
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary pattern-btn" data-color="blue">
+              🔵 Azul
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary pattern-btn" data-color="white">
+              ⚪ Blanco
+            </button>
+          </div>
+        </div>
 
-  <div id="delete-captcha-error" class="text-danger small text-center d-none">
-    Resultado incorrecto. Inténtalo de nuevo.
-  </div>
-</div>
+        <!-- Muestra lo que el usuario ha clickeado -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Tu secuencia</div>
+          <div id="delete-captcha-clicked" class="small fw-semibold"></div>
+        </div>
+
+        <div id="delete-captcha-error"
+             class="text-danger small text-center d-none">
+          El patrón no coincide. Inténtalo de nuevo.
+        </div>
+      </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+          Cancelar
+        </button>
         <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteEquipoCaptcha()">
           Sí, eliminar
         </button>
@@ -171,94 +220,117 @@
     </div>
   </div>
 </div>
+
 <script>
   let deleteEquipoForm = null;
-  let capA = 0;
-  let capB = 0;
-  let capOp = "+";
+  let expectedPattern = [];
+  let clickedPattern  = [];
+
+  const COLOR_MAP = {
+    red:   { emoji: "🔴", label: "Rojo"   },
+    green: { emoji: "🟢", label: "Verde"  },
+    blue:  { emoji: "🔵", label: "Azul"   },
+    white: { emoji: "⚪", label: "Blanco" }
+  };
+
+  function randomPattern() {
+    const colors = ["red", "green", "blue", "white"];
+    const patternLength = 3; // 3 pasos
+    const pattern = [];
+    for (let i = 0; i < patternLength; i++) {
+      const idx = Math.floor(Math.random() * colors.length);
+      pattern.push(colors[idx]);
+    }
+    return pattern;
+  }
+
+  function renderPattern(pattern, elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.textContent = pattern
+      .map(c => COLOR_MAP[c].emoji)
+      .join(" ");
+  }
+
+  function renderClickedPattern() {
+    const el = document.getElementById("delete-captcha-clicked");
+    if (!el) return;
+    el.textContent = clickedPattern
+      .map(c => COLOR_MAP[c].emoji)
+      .join(" ");
+  }
 
   function openDeleteEquipoModal(button, codigo) {
-    deleteEquipoForm = button.closest('form');
+    deleteEquipoForm = button.closest("form");
 
-    // Generar dos números aleatorios (1 a 9)
-    capA = Math.floor(Math.random() * 9) + 1;
-    capB = Math.floor(Math.random() * 9) + 1;
+    // Generar nuevo patrón y limpiar selección
+    expectedPattern = randomPattern();
+    clickedPattern  = [];
 
-    // Elegir aleatoriamente la operación
-    const operaciones = ["+", "-", "×", "÷"];
-    capOp = operaciones[Math.floor(Math.random() * operaciones.length)];
+    // Mostrar info
+    document.getElementById("delete-equipo-code").textContent = codigo;
+    renderPattern(expectedPattern, "delete-captcha-pattern");
+    renderClickedPattern();
+    document.getElementById("delete-captcha-error").classList.add("d-none");
 
-    // Evitar divisiones no enteras o por cero
-    if (capOp === "÷") {
-      capB = [1, 2, 3].includes(capB) ? capB : 1 + Math.floor(Math.random() * 3);
-      capA = capB * (1 + Math.floor(Math.random() * 3)); // garantiza entero
-    }
+    // Asignar listeners a los botones de colores
+    document.querySelectorAll(".pattern-btn").forEach(btn => {
+      btn.onclick = function () {
+        const color = this.getAttribute("data-color");
+        clickedPattern.push(color);
+        renderClickedPattern();
+      };
+    });
 
-    // Mostrar datos en el modal
-    document.getElementById('delete-equipo-code').textContent = codigo;
-    document.getElementById('delete-captcha-op').textContent = `${capA} ${capOp} ${capB}`;
-    document.getElementById('delete-captcha-input').value = '';
-    document.getElementById('delete-captcha-error').classList.add('d-none');
-
-    // Mostrar modal
-    const modalEl = document.getElementById('deleteEquipoModal');
-    const modal = new bootstrap.Modal(modalEl);
+    // Abrir modal
+    const modalEl = document.getElementById("deleteEquipoModal");
+    const modal   = new bootstrap.Modal(modalEl);
     modal.show();
   }
 
   function confirmDeleteEquipoCaptcha() {
-    const inputEl = document.getElementById('delete-captcha-input');
-    const errorEl = document.getElementById('delete-captcha-error');
-    const valor = parseInt(inputEl.value, 10);
+    const errorEl = document.getElementById("delete-captcha-error");
 
-    // Evaluar resultado esperado
-    let esperado;
-    switch (capOp) {
-      case "+": esperado = capA + capB; break;
-      case "-": esperado = capA - capB; break;
-      case "×": esperado = capA * capB; break;
-      case "÷": esperado = Math.floor(capA / capB); break;
-    }
+    // Comprobar longitud y coincidencia exacta
+    const okLength = (clickedPattern.length === expectedPattern.length);
+    const okPattern = okLength && clickedPattern.every(
+      (c, idx) => c === expectedPattern[idx]
+    );
 
-    if (valor === esperado) {
+    if (okPattern) {
       if (deleteEquipoForm) {
-        deleteEquipoForm.querySelector('input[name="cap_a"]').value = capA;
-        deleteEquipoForm.querySelector('input[name="cap_b"]').value = capB;
-        deleteEquipoForm.querySelector('input[name="cap_op"]').value = capOp;
-        deleteEquipoForm.querySelector('input[name="cap_result"]').value = valor;
+        // Guardar el patrón esperado y el clickeado en campos ocultos
+        deleteEquipoForm.querySelector('input[name="cap_a"]').value      = expectedPattern.join(",");
+        deleteEquipoForm.querySelector('input[name="cap_b"]').value      = clickedPattern.join(",");
+        deleteEquipoForm.querySelector('input[name="cap_op"]').value     = "pattern_colors";
+        deleteEquipoForm.querySelector('input[name="cap_result"]').value = okPattern ? "ok" : "fail";
+
         deleteEquipoForm.submit();
         deleteEquipoForm = null;
       }
-      const modalEl = document.getElementById('deleteEquipoModal');
-      const modal = bootstrap.Modal.getInstance(modalEl);
+      const modalEl = document.getElementById("deleteEquipoModal");
+      const modal   = bootstrap.Modal.getInstance(modalEl);
       if (modal) modal.hide();
     } else {
-      errorEl.classList.remove('d-none');
-      inputEl.focus();
+      errorEl.classList.remove("d-none");
     }
   }
 </script>
+
 <style>
   .modal-wide {
-    max-width: 600px; /* corresponde al tamaño "md" de Bootstrap */
+    max-width: 600px;
   }
 
-  .captcha-op {
+  .captcha-pattern {
     padding: 0.25rem 1.25rem;
     border-radius: 999px;
     border: 1px solid #dee2e6;
     background-color: #f8f9fa;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 600;
     white-space: nowrap;
-    min-width: 140px;
-  }
-
-  .captcha-input {
-    max-width: 180px;
+    min-width: 160px;
   }
 </style>
-
-
-
 {% endblock %}

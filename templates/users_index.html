@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Usuarios{% endblock %}
+
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-lg-10">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
       <h3 class="m-0">Usuarios</h3>
       <a class="btn btn-primary" href="{{ url_for('users_create') }}">Nuevo usuario</a>
     </div>
@@ -11,8 +13,8 @@
     <form class="row g-2 mb-3" method="get" action="{{ url_for('users_index') }}">
       <div class="col-sm-8 col-md-6">
         <input class="form-control" type="search" name="q"
-              placeholder="Buscar por usuario, identificación o correo"
-              value="{{ q or '' }}">
+               placeholder="Buscar por usuario, identificación o correo"
+               value="{{ q or '' }}">
       </div>
       <div class="col-auto">
         <button class="btn btn-outline-secondary" type="submit">Buscar</button>
@@ -24,8 +26,7 @@
       {% endif %}
     </form>
 
-
-    <div class="card shadow-sm">
+    <div class="card shadow-sm border-0">
       <div class="card-body p-0">
         <div class="table-responsive">
           <table class="table table-striped align-middle m-0">
@@ -47,21 +48,36 @@
                 <td>{{ u.identificacion }}</td>
                 <td>{{ u.username }}</td>
                 <td>{{ u.email }}</td>
-                <td><span class="badge text-bg-secondary">{{ u.role }}</span></td>
+                <td>
+                  <span class="badge text-bg-secondary">{{ u.role }}</span>
+                </td>
                 <td class="text-end">
-                  <a class="btn btn-sm btn-outline-primary" href="{{ url_for('users_edit', user_id=u.id) }}">Editar</a>
+                  <a class="btn btn-sm btn-outline-primary"
+                     href="{{ url_for('users_edit', user_id=u.id) }}">
+                    Editar
+                  </a>
 
-                  {# Eliminar con CSRF y bloqueo para el usuario logueado #}
-                  <form class="d-inline" method="POST" action="{{ url_for('users_delete', user_id=u.id) }}">
+                  <!-- Eliminar con CSRF, bloqueo para el usuario logueado y captcha visual -->
+                  <form class="d-inline delete-user-form"
+                        method="POST"
+                        action="{{ url_for('users_delete', user_id=u.id) }}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                    <!-- Campos ocultos para el captcha -->
+                    <input type="hidden" name="cap_a">
+                    <input type="hidden" name="cap_b">
+                    <input type="hidden" name="cap_op" value="security_pattern">
+                    <input type="hidden" name="cap_result">
+
                     {% if u.id == current_user.id %}
                       <button class="btn btn-sm btn-outline-secondary" type="button" disabled
                               title="No puedes eliminar tu propio usuario">
                         Eliminar
                       </button>
                     {% else %}
-                      <button class="btn btn-sm btn-outline-danger" type="submit"
-                              onclick="return confirm('¿Eliminar a {{ u.username }}?');">
+                      <button type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              onclick="openDeleteUserModal(this, '{{ u.username|e }}')">
                         Eliminar
                       </button>
                     {% endif %}
@@ -69,9 +85,14 @@
                 </td>
               </tr>
               {% else %}
-              <tr><td colspan="6" class="text-center py-4 text-muted">Sin resultados.</td></tr>
+              <tr>
+                <td colspan="6" class="text-center py-4 text-muted">
+                  Sin resultados.
+                </td>
+              </tr>
               {% endfor %}
             </tbody>
+
           </table>
         </div>
       </div>
@@ -79,4 +100,190 @@
 
   </div>
 </div>
+
+<!-- Modal captcha visual para eliminar usuario -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación de usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="mb-2">
+          Vas a eliminar al usuario <strong id="delete-user-username"></strong>.
+          Esta acción <strong>no se puede deshacer</strong> y se registrará en la auditoría.
+        </p>
+
+        <p class="mb-3">
+          Para continuar, reproduce la siguiente secuencia de iconos de seguridad:
+        </p>
+
+        <!-- Secuencia objetivo -->
+        <div class="text-center mb-3">
+          <div class="small text-muted mb-1">Secuencia objetivo</div>
+          <div class="user-captcha-pattern d-inline-flex align-items-center justify-content-center">
+            <span id="user-captcha-target"></span>
+          </div>
+        </div>
+
+        <!-- Botones de iconos -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Haz clic en los iconos en el mismo orden</div>
+          <div class="d-inline-flex gap-2 flex-wrap justify-content-center">
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary user-pattern-btn"
+                    data-key="user">
+              👤 Usuario
+            </button>
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary user-pattern-btn"
+                    data-key="lock">
+              🔐 Candado
+            </button>
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary user-pattern-btn"
+                    data-key="gear">
+              ⚙️ Configuración
+            </button>
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary user-pattern-btn"
+                    data-key="shield">
+              🛡️ Escudo
+            </button>
+          </div>
+        </div>
+
+        <!-- Secuencia clicada -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Tu secuencia</div>
+          <div id="user-captcha-clicked" class="small fw-semibold"></div>
+        </div>
+
+        <div id="user-captcha-error"
+             class="text-danger small text-center d-none">
+          La secuencia no coincide. Inténtalo de nuevo.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-secondary btn-sm"
+                data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button"
+                class="btn btn-danger btn-sm"
+                onclick="confirmDeleteUserCaptcha()">
+          Sí, eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let deleteUserForm      = null;
+  let expectedUserPattern = [];
+  let clickedUserPattern  = [];
+
+  const USER_ICON_MAP = {
+    user:   { emoji: "👤", label: "usuario" },
+    lock:   { emoji: "🔐", label: "candado" },
+    gear:   { emoji: "⚙️", label: "configuración" },
+    shield: { emoji: "🛡️", label: "escudo" }
+  };
+
+  const USER_ICON_KEYS = Object.keys(USER_ICON_MAP); // ["user","lock","gear","shield"]
+
+  function randomUserPattern() {
+    const patternLength = 3;  // longitud de la secuencia
+    const pattern = [];
+    for (let i = 0; i < patternLength; i++) {
+      const idx = Math.floor(Math.random() * USER_ICON_KEYS.length);
+      pattern.push(USER_ICON_KEYS[idx]);
+    }
+    return pattern;
+  }
+
+  function renderUserPattern(pattern, elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.textContent = pattern.map(k => USER_ICON_MAP[k].emoji).join(" ");
+  }
+
+  function renderUserClickedPattern() {
+    const el = document.getElementById("user-captcha-clicked");
+    if (!el) return;
+    el.textContent = clickedUserPattern.map(k => USER_ICON_MAP[k].emoji).join(" ");
+  }
+
+  function openDeleteUserModal(button, username) {
+    deleteUserForm = button.closest("form");
+
+    expectedUserPattern = randomUserPattern();
+    clickedUserPattern  = [];
+
+    document.getElementById("delete-user-username").textContent = username;
+    renderUserPattern(expectedUserPattern, "user-captcha-target");
+    renderUserClickedPattern();
+    document.getElementById("user-captcha-error").classList.add("d-none");
+
+    // Asignar eventos a los botones de iconos
+    document.querySelectorAll(".user-pattern-btn").forEach(btn => {
+      btn.onclick = function () {
+        const key = this.getAttribute("data-key");
+        clickedUserPattern.push(key);
+        renderUserClickedPattern();
+      };
+    });
+
+    const modalEl = document.getElementById("deleteUserModal");
+    const modal   = new bootstrap.Modal(modalEl);
+    modal.show();
+  }
+
+  function confirmDeleteUserCaptcha() {
+    const errorEl = document.getElementById("user-captcha-error");
+
+    const expected = expectedUserPattern;
+    const clicked  = clickedUserPattern;
+
+    const okLength  = (clicked.length === expected.length);
+    const okPattern = okLength && expected.every((k, i) => k === clicked[i]);
+
+    if (okPattern && deleteUserForm) {
+      deleteUserForm.querySelector('input[name="cap_a"]').value      = expected.join(",");
+      deleteUserForm.querySelector('input[name="cap_b"]').value      = clicked.join(",");
+      deleteUserForm.querySelector('input[name="cap_result"]').value = "ok";
+
+      deleteUserForm.submit();
+      deleteUserForm = null;
+
+      const modalEl = document.getElementById("deleteUserModal");
+      const modal   = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    } else {
+      errorEl.classList.remove("d-none");
+    }
+  }
+</script>
+
+<style>
+  .modal-wide {
+    max-width: 600px;
+  }
+
+  .user-captcha-pattern {
+    padding: 0.25rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+</style>
 {% endblock %}

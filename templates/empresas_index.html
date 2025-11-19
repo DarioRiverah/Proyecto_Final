@@ -6,6 +6,7 @@
 
 <div class="row justify-content-center">
   <div class="col-lg-10">
+
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
       <div class="d-flex align-items-center gap-2">
         <h3 class="m-0">Empresas externas</h3>
@@ -15,7 +16,9 @@
       </div>
 
       <form class="d-flex gap-2" method="get" action="{{ url_for('empresas_index') }}">
-        <input class="form-control" name="q" value="{{ q or '' }}"
+        <input class="form-control"
+               name="q"
+               value="{{ q or '' }}"
                placeholder="Buscar por identificación o nombre…">
         <div class="btn-group">
           <button class="btn btn-outline-primary" type="submit">Buscar</button>
@@ -30,7 +33,7 @@
       {% endif %}
     </div>
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm border-0">
       <div class="card-body p-0">
         <div class="table-responsive">
           <table class="table table-striped align-middle m-0">
@@ -57,11 +60,20 @@
                       Editar
                     </a>
 
-                    <form class="d-inline" method="POST"
+                    <form class="d-inline delete-empresa-form"
+                          method="POST"
                           action="{{ url_for('empresas_delete', empresa_id=e.id) }}">
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                      <button class="btn btn-sm btn-outline-danger" type="submit"
-                              onclick="return confirm('¿Eliminar empresa {{ e.nombre }}?');">
+
+                      <!-- campos ocultos para el captcha visual -->
+                      <input type="hidden" name="cap_a">
+                      <input type="hidden" name="cap_b">
+                      <input type="hidden" name="cap_op" value="empresa_pattern">
+                      <input type="hidden" name="cap_result">
+
+                      <button type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              onclick="openDeleteEmpresaModal(this, '{{ e.nombre|e }}')">
                         Eliminar
                       </button>
                     </form>
@@ -84,4 +96,192 @@
 
   </div>
 </div>
+
+{% if is_admin %}
+<!-- Modal captcha visual para eliminar empresa -->
+<div class="modal fade" id="deleteEmpresaModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación de empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="mb-2">
+          Vas a eliminar la empresa <strong id="delete-empresa-nombre"></strong>.
+          Esta acción <strong>no se puede deshacer</strong> y se registrará en la auditoría.
+        </p>
+
+        <p class="mb-3">
+          Para continuar, reproduce la siguiente secuencia de iconos de negocio:
+        </p>
+
+        <!-- Secuencia objetivo -->
+        <div class="text-center mb-3">
+          <div class="small text-muted mb-1">Secuencia objetivo</div>
+          <div class="empresa-captcha-pattern d-inline-flex align-items-center justify-content-center">
+            <span id="empresa-captcha-target"></span>
+          </div>
+        </div>
+
+        <!-- Botones de iconos -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Haz clic en los iconos en el mismo orden</div>
+          <div class="d-inline-flex gap-2 flex-wrap justify-content-center">
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary empresa-pattern-btn"
+                    data-key="office">
+              🏢 Oficina
+            </button>
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary empresa-pattern-btn"
+                    data-key="factory">
+              🏭 Fábrica
+            </button>
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary empresa-pattern-btn"
+                    data-key="truck">
+              🚚 Logística
+            </button>
+            <button type="button"
+                    class="btn btn-sm btn-outline-secondary empresa-pattern-btn"
+                    data-key="deal">
+              🤝 Acuerdo
+            </button>
+          </div>
+        </div>
+
+        <!-- Secuencia clicada -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Tu secuencia</div>
+          <div id="empresa-captcha-clicked" class="small fw-semibold"></div>
+        </div>
+
+        <div id="empresa-captcha-error"
+             class="text-danger small text-center d-none">
+          La secuencia no coincide. Inténtalo de nuevo.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-secondary btn-sm"
+                data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button"
+                class="btn btn-danger btn-sm"
+                onclick="confirmDeleteEmpresaCaptcha()">
+          Sí, eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let deleteEmpresaForm      = null;
+  let expectedEmpresaPattern = [];
+  let clickedEmpresaPattern  = [];
+
+  const EMPRESA_ICON_MAP = {
+    office:  { emoji: "🏢", label: "oficina" },
+    factory: { emoji: "🏭", label: "fábrica" },
+    truck:   { emoji: "🚚", label: "logística" },
+    deal:    { emoji: "🤝", label: "acuerdo" }
+  };
+
+  const EMPRESA_ICON_KEYS = Object.keys(EMPRESA_ICON_MAP); // ["office","factory","truck","deal"]
+
+  function randomEmpresaPattern() {
+    const patternLength = 3;  // longitud de la secuencia
+    const pattern = [];
+    for (let i = 0; i < patternLength; i++) {
+      const idx = Math.floor(Math.random() * EMPRESA_ICON_KEYS.length);
+      pattern.push(EMPRESA_ICON_KEYS[idx]);
+    }
+    return pattern;
+  }
+
+  function renderEmpresaPattern(pattern, elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.textContent = pattern.map(k => EMPRESA_ICON_MAP[k].emoji).join(" ");
+  }
+
+  function renderEmpresaClickedPattern() {
+    const el = document.getElementById("empresa-captcha-clicked");
+    if (!el) return;
+    el.textContent = clickedEmpresaPattern.map(k => EMPRESA_ICON_MAP[k].emoji).join(" ");
+  }
+
+  function openDeleteEmpresaModal(button, nombreEmpresa) {
+    deleteEmpresaForm = button.closest("form");
+
+    expectedEmpresaPattern = randomEmpresaPattern();
+    clickedEmpresaPattern  = [];
+
+    document.getElementById("delete-empresa-nombre").textContent = nombreEmpresa;
+    renderEmpresaPattern(expectedEmpresaPattern, "empresa-captcha-target");
+    renderEmpresaClickedPattern();
+    document.getElementById("empresa-captcha-error").classList.add("d-none");
+
+    // Asignar eventos a los botones de iconos
+    document.querySelectorAll(".empresa-pattern-btn").forEach(btn => {
+      btn.onclick = function () {
+        const key = this.getAttribute("data-key");
+        clickedEmpresaPattern.push(key);
+        renderEmpresaClickedPattern();
+      };
+    });
+
+    const modalEl = document.getElementById("deleteEmpresaModal");
+    const modal   = new bootstrap.Modal(modalEl);
+    modal.show();
+  }
+
+  function confirmDeleteEmpresaCaptcha() {
+    const errorEl = document.getElementById("empresa-captcha-error");
+
+    const expected = expectedEmpresaPattern;
+    const clicked  = clickedEmpresaPattern;
+
+    const okLength  = (clicked.length === expected.length);
+    const okPattern = okLength && expected.every((k, i) => k === clicked[i]);
+
+    if (okPattern && deleteEmpresaForm) {
+      deleteEmpresaForm.querySelector('input[name="cap_a"]').value      = expected.join(",");
+      deleteEmpresaForm.querySelector('input[name="cap_b"]').value      = clicked.join(",");
+      deleteEmpresaForm.querySelector('input[name="cap_result"]').value = "ok";
+
+      deleteEmpresaForm.submit();
+      deleteEmpresaForm = null;
+
+      const modalEl = document.getElementById("deleteEmpresaModal");
+      const modal   = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    } else {
+      errorEl.classList.remove("d-none");
+    }
+  }
+</script>
+
+<style>
+  .modal-wide {
+    max-width: 600px;
+  }
+
+  .empresa-captcha-pattern {
+    padding: 0.25rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+</style>
+{% endif %}
 {% endblock %}

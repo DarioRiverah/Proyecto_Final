@@ -6,6 +6,7 @@
 
 <div class="row justify-content-center">
   <div class="col-lg-11">
+
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
       <div class="d-flex align-items-center gap-2">
         <h3 class="m-0">Responsables de entrega</h3>
@@ -15,7 +16,9 @@
       </div>
 
       <form class="d-flex gap-2" method="get" action="{{ url_for('responsables_index') }}">
-        <input class="form-control" name="q" value="{{ q or '' }}"
+        <input class="form-control"
+               name="q"
+               value="{{ q or '' }}"
                placeholder="Buscar por ID, nombre, correo o empresa…">
         <div class="btn-group">
           <button class="btn btn-outline-primary" type="submit">Buscar</button>
@@ -30,7 +33,7 @@
       {% endif %}
     </div>
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm border-0">
       <div class="card-body p-0">
         <div class="table-responsive">
           <table class="table table-striped align-middle m-0">
@@ -73,11 +76,20 @@
                       Editar
                     </a>
 
-                    <form class="d-inline" method="POST"
+                    <form class="d-inline delete-resp-form"
+                          method="POST"
                           action="{{ url_for('responsables_delete', resp_id=r.id) }}">
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                      <button class="btn btn-sm btn-outline-danger" type="submit"
-                              onclick="return confirm('¿Eliminar responsable {{ r.nombre_responsable }}?');">
+
+                      <!-- campos ocultos para el captcha visual -->
+                      <input type="hidden" name="cap_a">
+                      <input type="hidden" name="cap_b">
+                      <input type="hidden" name="cap_op" value="grid_icons">
+                      <input type="hidden" name="cap_result">
+
+                      <button type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              onclick="openDeleteRespModal(this, '{{ r.nombre_responsable|e }}')">
                         Eliminar
                       </button>
                     </form>
@@ -100,4 +112,209 @@
 
   </div>
 </div>
+
+{% if is_admin %}
+<!-- Modal captcha para eliminar responsable -->
+<div class="modal fade" id="deleteRespModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación de responsable</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="mb-2">
+          Vas a eliminar al responsable <strong id="delete-resp-name"></strong>.
+          Esta acción <strong>no se puede deshacer</strong> y se registrará en la auditoría.
+        </p>
+
+        <p class="mb-3">
+          Para continuar, selecciona todas las casillas que tengan el siguiente ícono:
+        </p>
+
+        <!-- Ícono objetivo -->
+        <div class="text-center mb-3">
+          <div class="small text-muted mb-1">Ícono objetivo</div>
+          <div class="captcha-target d-inline-flex align-items-center justify-content-center">
+            <span id="grid-captcha-target-icon" style="font-size: 1.8rem;"></span>
+          </div>
+        </div>
+
+        <!-- Cuadrícula 3x3 -->
+        <div class="text-center mb-2">
+          <div class="small text-muted mb-1">Haz clic en todas las casillas que lo contengan</div>
+          <div id="grid-captcha-container" class="grid-captcha">
+            <!-- Celdas generadas por JS -->
+          </div>
+        </div>
+
+        <div id="grid-captcha-error"
+             class="text-danger small text-center d-none">
+          La selección no coincide. Inténtalo de nuevo.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteRespCaptcha()">
+          Sí, eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let deleteRespForm   = null;
+  let gridExpectedIdxs = [];  // índices correctos (donde está el ícono objetivo)
+  let gridClickedIdxs  = [];  // índices marcados por el usuario
+  let gridTargetKey    = null;
+
+  const ICONS_POOL = {
+    hospital:   { emoji: "🏥", label: "hospital" },
+    fabrica:    { emoji: "🏭", label: "fábrica" },
+    oficina:    { emoji: "🏢", label: "oficina" },
+    centro_com: { emoji: "🏬", label: "centro comercial" }
+  };
+
+  const ICON_KEYS = Object.keys(ICONS_POOL);
+
+  function openDeleteRespModal(button, nombreResp) {
+    deleteRespForm = button.closest("form");
+
+    // 1) Elegir al azar un tipo de ícono objetivo
+    gridTargetKey  = ICON_KEYS[Math.floor(Math.random() * ICON_KEYS.length)];
+    const target   = ICONS_POOL[gridTargetKey];
+
+    document.getElementById("delete-resp-name").textContent = nombreResp;
+    document.getElementById("grid-captcha-target-icon").textContent = target.emoji;
+
+    // 2) Generar cuadrícula 3x3
+    const gridSize  = 9; // 3x3
+    const container = document.getElementById("grid-captcha-container");
+    container.innerHTML = "";
+
+    gridExpectedIdxs = [];
+    gridClickedIdxs  = [];
+
+    // Aseguramos al menos 2 celdas correctas
+    const correctCount = 2 + Math.floor(Math.random() * 2); // 2 o 3
+    const indices = Array.from({length: gridSize}, (_, i) => i);
+
+    // Mezclar índices (Fisher-Yates)
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+
+    const correctIdxs = indices.slice(0, correctCount);
+    gridExpectedIdxs = correctIdxs.slice().sort((a, b) => a - b);
+
+    for (let i = 0; i < gridSize; i++) {
+      let iconKey;
+      if (correctIdxs.includes(i)) {
+        iconKey = gridTargetKey; // esta celda es correcta
+      } else {
+        const others = ICON_KEYS.filter(k => k !== gridTargetKey);
+        iconKey = others[Math.floor(Math.random() * others.length)];
+      }
+
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = "grid-captcha-cell";
+      cell.setAttribute("data-idx", String(i));
+      cell.setAttribute("data-key", iconKey);
+      cell.textContent = ICONS_POOL[iconKey].emoji;
+
+      cell.addEventListener("click", function () {
+        const idx = parseInt(this.getAttribute("data-idx"), 10);
+        const pos = gridClickedIdxs.indexOf(idx);
+
+        if (pos === -1) {
+          gridClickedIdxs.push(idx);
+          this.classList.add("selected");
+        } else {
+          gridClickedIdxs.splice(pos, 1);
+          this.classList.remove("selected");
+        }
+
+        gridClickedIdxs.sort((a, b) => a - b);
+      });
+
+      container.appendChild(cell);
+    }
+
+    document.getElementById("grid-captcha-error").classList.add("d-none");
+
+    const modalEl = document.getElementById("deleteRespModal");
+    const modal   = new bootstrap.Modal(modalEl);
+    modal.show();
+  }
+
+  function confirmDeleteRespCaptcha() {
+    const errorEl = document.getElementById("grid-captcha-error");
+
+    const expected = gridExpectedIdxs.slice().sort((a, b) => a - b);
+    const clicked  = gridClickedIdxs.slice().sort((a, b) => a - b);
+
+    const sameLength = expected.length === clicked.length && expected.length > 0;
+    const sameValues = sameLength && expected.every((v, i) => v === clicked[i]);
+
+    if (sameValues && deleteRespForm) {
+      deleteRespForm.querySelector('input[name="cap_a"]').value      = expected.join(",");
+      deleteRespForm.querySelector('input[name="cap_b"]').value      = clicked.join(",");
+      deleteRespForm.querySelector('input[name="cap_result"]').value = sameValues ? "ok" : "fail";
+
+      deleteRespForm.submit();
+      deleteRespForm = null;
+
+      const modalEl = document.getElementById("deleteRespModal");
+      const modal   = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    } else {
+      errorEl.classList.remove("d-none");
+    }
+  }
+</script>
+
+<style>
+  .modal-wide {
+    max-width: 600px;
+  }
+
+  .captcha-target {
+    padding: 0.25rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    min-width: 80px;
+  }
+
+  .grid-captcha {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-auto-rows: 60px;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .grid-captcha-cell {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .grid-captcha-cell.selected {
+    background-color: #0d6efd22;
+    border-color: #0d6efd;
+    transform: translateY(-1px);
+  }
+</style>
+{% endif %}
 {% endblock %}
