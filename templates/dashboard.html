@@ -12,9 +12,9 @@
         <div>
           <h3 class="mb-1 d-flex align-items-center">
             <span class="d-inline-flex align-items-center justify-content-center
-                         rounded-circle me-2 lh-1
-                         bg-danger-subtle text-danger-emphasis border border-danger-subtle"
-                  style="width: 38px; height: 38px; min-width: 38px;">
+             rounded-circle me-2 lh-1
+             bg-primary-subtle text-primary-emphasis border border-primary-subtle"
+              style="width: 38px; height: 38px; min-width: 38px; background: rgba(0, 102, 204, 0.12) !important; color: var(--medical-primary) !important; border-color: rgba(0, 102, 204, 0.25) !important;">
               <i class="bi bi-person-fill fs-4 m-0"></i>
             </span>
             <span>Hola, {{ data.nombre }}</span>
@@ -25,12 +25,11 @@
             <strong>{{ data.correo }}</strong>.
           </p>
 
-          <span class="badge rounded-pill
-                       {% if current_user.role == 'admin' %}
-                         bg-danger-subtle text-danger-emphasis border border-danger-subtle
-                       {% else %}
-                         bg-primary-subtle text-primary-emphasis border border-primary-subtle
-                       {% endif %}">
+          <span class="badge rounded-pill" style="background: rgba(0, 102, 204, 0.12); 
+             color: var(--medical-primary-darker); 
+             border: 1px solid rgba(0, 102, 204, 0.25);
+             padding: 0.5rem 1rem;
+             font-weight: 600;">
             <i class="bi bi-person-badge me-1"></i>
             Rol: {{ current_user.role|capitalize }}
           </span>
@@ -63,7 +62,7 @@
           <!-- Siempre visibles -->
           <div class="col-12 col-md-6">
             <a href="{{ url_for('equipos_index') }}"
-               class="btn btn-outline-primary w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-primary w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-pc-display fs-4"></i>
               <div>
                 <div class="fw-semibold">Equipos</div>
@@ -77,7 +76,7 @@
           <!-- Reportes -->
           <div class="col-12 col-md-6">
             <a href="{{ url_for('reportes') }}"
-               class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-graph-up-arrow fs-4"></i>
               <div>
                 <div class="fw-semibold">Reportes</div>
@@ -91,7 +90,7 @@
           <!-- Perfil -->
           <div class="col-12 col-md-6">
             <a href="{{ url_for('perfil') }}"
-               class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-person-circle fs-4"></i>
               <div>
                 <div class="fw-semibold">Mi perfil</div>
@@ -105,7 +104,7 @@
           <!-- Empresas -->
           <div class="col-12 col-md-6">
             <a href="{{ url_for('empresas_index') }}"
-               class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-buildings fs-4"></i>
               <div>
                 <div class="fw-semibold">Empresas externas</div>
@@ -119,7 +118,7 @@
           <!-- Responsables -->
           <div class="col-12 col-md-6">
             <a href="{{ url_for('responsables_index') }}"
-               class="btn btn-outline-info w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-info w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-people fs-4"></i>
               <div>
                 <div class="fw-semibold">Responsables de entrega</div>
@@ -141,7 +140,7 @@
 
           <div class="col-12 col-md-6">
             <a href="{{ url_for('equipos_create') }}"
-               class="btn btn-outline-primary w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-primary w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-plus-circle fs-4"></i>
               <div>
                 <div class="fw-semibold">Nuevo equipo</div>
@@ -154,7 +153,7 @@
 
           <div class="col-12 col-md-6">
             <a href="{{ url_for('users_index') }}"
-               class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-success w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-people-gear fs-4"></i>
               <div>
                 <div class="fw-semibold">Gestión de usuarios</div>
@@ -167,7 +166,7 @@
 
           <div class="col-12 col-md-6">
             <a href="{{ url_for('audit_equipos_admin') }}"
-               class="btn btn-outline-warning w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-warning w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-clipboard-data fs-4"></i>
               <div>
                 <div class="fw-semibold">Auditoría de equipos</div>
@@ -180,7 +179,7 @@
 
           <div class="col-12 col-md-6">
             <a href="{{ url_for('audit_admin') }}"
-               class="btn btn-outline-danger w-100 text-start d-flex align-items-center gap-2 py-3">
+              class="btn btn-outline-danger w-100 text-start d-flex align-items-center gap-2 py-3">
               <i class="bi bi-activity fs-4"></i>
               <div>
                 <div class="fw-semibold">Auditoría de usuarios</div>
@@ -317,5 +316,5 @@
     </div>
   </div>
 
-</div>  {# cierre row g-4 #}
+</div> {# cierre row g-4 #}
 {% endblock %}
