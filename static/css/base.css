@@ -1,108 +1,91 @@
-
-/* ========== Variables CSS - Paleta Armónica Triádica ========== */
+/* ========== Variables CSS - Sistema Médico Profesional ========== */
 :root {
-  /* 
-    COLOR DOMINANTE: #0066cc (Azul Médico - 210°)
-    ESQUEMA: Triádico Modificado con Análogos
-    - Primario: 210° (Azul)
-    - Complementario: 180° (Cyan/Turquesa)
-    - Análogo 1: 150° (Verde-Azulado)
-    - Acento: 30° (Naranja suave para alertas)
-  */
-  
-  /* ===== COLOR PRIMARIO - Azul Médico (210°) ===== */
-  --medical-primary: #0066cc;           /* Base principal */
-  --medical-primary-dark: #004d99;      /* -20% luminosidad */
-  --medical-primary-darker: #003366;    /* -40% luminosidad */
-  --medical-primary-light: #3385d6;     /* +20% luminosidad */
-  --medical-primary-lighter: #66a3e0;   /* +40% luminosidad */
+  /* ===== PALETA DE COLORES MÉDICA PROFESIONAL ===== */
+  --medical-primary: #0066cc;
+  --medical-primary-dark: #004d99;
+  --medical-primary-darker: #003d7a;
+  --medical-primary-light: #3385d6;
+  --medical-primary-lighter: #66a3e0;
   --medical-primary-alpha: rgba(0, 102, 204, 0.12);
   
-  /* ===== COLOR SECUNDARIO - Turquesa (180°) ===== */
-  --medical-secondary: #00a3cc;         /* Turquesa médico */
-  --medical-secondary-dark: #007a99;    /* -20% luminosidad */
-  --medical-secondary-light: #33b8d6;   /* +20% luminosidad */
-  --medical-secondary-lighter: #66cce0; /* +40% luminosidad */
+  --medical-secondary: #00a3cc;
+  --medical-secondary-dark: #007a99;
+  --medical-secondary-light: #33b8d6;
+  --medical-secondary-lighter: #66cce0;
   --medical-secondary-alpha: rgba(0, 163, 204, 0.12);
   
-  /* ===== COLOR TERCIARIO - Verde-Azulado (150°) ===== */
-  --medical-tertiary: #00cc99;          /* Verde-azulado */
-  --medical-tertiary-dark: #009973;     /* -20% luminosidad */
-  --medical-tertiary-light: #33d6ad;    /* +20% luminosidad */
-  --medical-tertiary-lighter: #66e0c2;  /* +40% luminosidad */
+  --medical-tertiary: #00cc99;
+  --medical-tertiary-dark: #009973;
+  --medical-tertiary-light: #33d6ad;
+  --medical-tertiary-lighter: #66e0c2;
   --medical-tertiary-alpha: rgba(0, 204, 153, 0.12);
   
-  /* ===== COLORES DE ACENTO - Naranja y Complementarios ===== */
-  --accent-warm: #ff9933;               /* Naranja suave (30°) */
+  --accent-warm: #ff9933;
   --accent-warm-dark: #cc7a29;
   --accent-warm-light: #ffad5c;
   
-  /* ===== ESTADOS CLÍNICOS - Armonía Cromática ===== */
-  --status-critical: #cc3333;           /* Rojo (0°) - 80% saturación */
-  --status-urgent: #ff9933;             /* Naranja (30°) */
-  --status-stable: #00cc99;             /* Verde-azulado (150°) */
-  --status-monitoring: #3399ff;         /* Azul claro (210°+10) */
-  --status-inactive: #8899aa;           /* Gris azulado neutro */
+  --accent-purple: #8b5cf6;
+  --accent-purple-dark: #7c3aed;
+  --accent-purple-light: #a78bfa;
   
-  /* ===== GRADIENTES ARMÓNICOS ===== */
-  /* Gradiente Principal: Azul → Turquesa (210° → 180°) */
+  /* ===== ESTADOS CLÍNICOS ===== */
+  --status-critical: #dc3545;
+  --status-critical-dark: #c82333;
+  --status-urgent: #ff9933;
+  --status-stable: #00cc99;
+  --status-monitoring: #3399ff;
+  --status-inactive: #8899aa;
+  
+  /* ===== GRADIENTES ARMÓNICOS MEJORADOS ===== */
   --gradient-primary: linear-gradient(135deg, #0066cc 0%, #00a3cc 100%);
-  
-  /* Gradiente Secundario: Turquesa → Verde-Azulado (180° → 150°) */
   --gradient-secondary: linear-gradient(135deg, #00a3cc 0%, #00cc99 100%);
-  
-  /* Gradiente Terciario: Azul → Verde-Azulado (210° → 150°) */
   --gradient-tertiary: linear-gradient(135deg, #0066cc 0%, #00cc99 100%);
-  
-  /* Gradiente Hero: Triada completa */
   --gradient-hero: linear-gradient(135deg, #0066cc 0%, #00a3cc 50%, #00cc99 100%);
+  --gradient-soft: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #e0e7ff 100%);
+  --gradient-warm: linear-gradient(135deg, #ff9933 0%, #ff6b6b 100%);
+  --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
   
-  /* Gradiente Suave: Análogos cercanos */
-  --gradient-soft: linear-gradient(135deg, #3385d6 0%, #33b8d6 50%, #33d6ad 100%);
-  
-  /* ===== OVERLAY CON TINTE AZULADO SUTIL ===== */
+  /* ===== OVERLAY PROFESIONAL ===== */
   --gradient-overlay: linear-gradient(180deg, 
-    rgba(248, 252, 255, 0.45) 0%,      /* Tinte azul muy suave */
-    rgba(243, 250, 253, 0.55) 50%,
-    rgba(238, 248, 252, 0.60) 100%);
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(248, 252, 255, 0.94) 50%,
+    rgba(243, 250, 253, 0.96) 100%);
   
-  /* ===== ESCALA DE GRISES CON TINTE AZULADO ===== */
+  /* ===== ESCALA DE GRISES PROFESIONAL ===== */
   --white: #ffffff;
-  --gray-50: #f8fbfd;    /* Tinte azul 210° */
-  --gray-100: #f0f6fa;
-  --gray-200: #e3eef5;
-  --gray-300: #cde0ed;
-  --gray-400: #a0c1d9;
-  --gray-500: #6b95b8;
-  --gray-600: #4d7599;
-  --gray-700: #36537a;
-  --gray-800: #1f3352;
-  --gray-900: #0f1a2e;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
   
-  /* ===== SISTEMA DE SOMBRAS CON TINTE AZULADO ===== */
-  --shadow-xs: 0 1px 2px rgba(0, 102, 204, 0.05);
-  --shadow-sm: 0 2px 4px rgba(0, 102, 204, 0.07), 0 1px 2px rgba(0, 102, 204, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 102, 204, 0.10), 0 2px 4px rgba(0, 102, 204, 0.05);
-  --shadow-lg: 0 8px 24px rgba(0, 102, 204, 0.12), 0 4px 8px rgba(0, 102, 204, 0.06);
-  --shadow-xl: 0 16px 48px rgba(0, 102, 204, 0.14), 0 8px 16px rgba(0, 102, 204, 0.07);
-  --shadow-2xl: 0 24px 64px rgba(0, 102, 204, 0.16), 0 12px 32px rgba(0, 102, 204, 0.08);
+  /* ===== SISTEMA DE SOMBRAS PROFESIONAL ===== */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   
-  /* Sombras Específicas por Color */
-  --shadow-primary: 0 8px 24px rgba(0, 102, 204, 0.22), 
-                    0 4px 8px rgba(0, 102, 204, 0.14);
-  --shadow-secondary: 0 8px 24px rgba(0, 163, 204, 0.20),
-                      0 4px 8px rgba(0, 163, 204, 0.12);
-  --shadow-tertiary: 0 8px 24px rgba(0, 204, 153, 0.20),
-                     0 4px 8px rgba(0, 204, 153, 0.12);
+  --shadow-primary: 0 10px 25px -5px rgba(0, 102, 204, 0.3), 0 4px 10px -2px rgba(0, 102, 204, 0.2);
+  --shadow-secondary: 0 10px 25px -5px rgba(0, 163, 204, 0.3), 0 4px 10px -2px rgba(0, 163, 204, 0.2);
+  --shadow-tertiary: 0 10px 25px -5px rgba(0, 204, 153, 0.3), 0 4px 10px -2px rgba(0, 204, 153, 0.2);
+  --shadow-purple: 0 10px 25px -5px rgba(139, 92, 246, 0.3), 0 4px 10px -2px rgba(139, 92, 246, 0.2);
   
-  /* ===== TRANSICIONES Y TIMING ===== */
+  /* ===== TRANSICIONES SUAVIZADAS ===== */
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-bounce: cubic-bezier(0.68, -0.10, 0.265, 1.10);
+  --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
   
   --transition-fast: 200ms var(--ease-smooth);
-  --transition-base: 350ms var(--ease-gentle);
-  --transition-slow: 500ms var(--ease-gentle);
+  --transition-base: 300ms var(--ease-gentle);
+  --transition-slow: 450ms var(--ease-gentle);
   
   /* ===== ESPACIADO RESPONSIVO ===== */
   --spacing-xs: clamp(0.25rem, 0.5vw, 0.375rem);
@@ -116,13 +99,13 @@
   --border-radius-sm: 0.5rem;
   --border-radius-md: 0.75rem;
   --border-radius-lg: 1rem;
-  --border-radius-xl: 1.5rem;
-  --border-radius-2xl: 2rem;
+  --border-radius-xl: 1.25rem;
+  --border-radius-2xl: 1.5rem;
   --border-radius-full: 9999px;
   
   /* ===== BLUR GLASSMORPHISM ===== */
-  --blur-sm: blur(6px);
-  --blur-md: blur(10px);
+  --blur-sm: blur(8px);
+  --blur-md: blur(12px);
   --blur-lg: blur(16px);
   --blur-xl: blur(24px);
   
@@ -136,7 +119,7 @@
   --z-notification: 1080;
 }
 
-/* ========== Reset Profesional ========== */
+/* ========== Reset Profesional Mejorado ========== */
 *,
 *::before,
 *::after {
@@ -153,17 +136,88 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ========== Body con Imagen Médica Visible ========== */
+/* ========== Tipografía Profesional Mejorada ========== */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "SF Pro Display", sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--gray-800);
+  font-weight: 400;
+  letter-spacing: -0.01em;
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* Imagen de Fondo Principal - MÁXIMA VISIBILIDAD */
+/* Mejora de legibilidad para textos */
+p, li, span {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--gray-700);
+  font-weight: 400;
+}
+
+/* Títulos con mejor jerarquía visual */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--gray-900);
+  margin-bottom: 0.75rem;
+}
+
+h1 { 
+  font-size: clamp(2rem, 4vw, 3rem); 
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2 { 
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem); 
+  font-weight: 700;
+}
+
+h3 { 
+  font-size: clamp(1.5rem, 3vw, 2rem); 
+  font-weight: 700;
+}
+
+h4 { 
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem); 
+  font-weight: 600;
+}
+
+h5 { 
+  font-size: clamp(1.125rem, 2vw, 1.5rem); 
+  font-weight: 600;
+}
+
+h6 { 
+  font-size: clamp(1rem, 1.5vw, 1.25rem); 
+  font-weight: 600;
+}
+
+/* Links con mejor estilo */
+a {
+  color: var(--medical-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--medical-primary-dark);
+  text-decoration: underline;
+}
+
+/* Mejor contraste para textos pequeños */
+small, .small-text {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+/* ========== Fondo con Imagen Médica Optimizado ========== */
 body::before {
   content: '';
   position: fixed;
@@ -177,11 +231,9 @@ body::before {
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: -2;
-  /* Ligero tinte azulado para armonía */
-  filter: brightness(1.05) contrast(1.08) saturate(0.92) hue-rotate(2deg);
+  filter: brightness(1.15) contrast(1.08) saturate(1.05);
 }
 
-/* Overlay Muy Sutil con Tinte Azulado */
 body::after {
   content: '';
   position: fixed;
@@ -189,30 +241,23 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--gradient-overlay);
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(248, 252, 255, 0.88) 50%,
+    rgba(243, 250, 253, 0.90) 100%);
   z-index: -1;
   pointer-events: none;
 }
 
-/* Patrón Médico con Colores Armónicos */
-body {
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(0, 102, 204, 0.03) 0%, transparent 35%),
-    radial-gradient(circle at 85% 80%, rgba(0, 163, 204, 0.03) 0%, transparent 35%),
-    radial-gradient(circle at 50% 50%, rgba(0, 204, 153, 0.02) 0%, transparent 40%);
-  background-attachment: fixed;
-}
-
-/* ========== Header Premium Glassmorphism ========== */
+/* ========== Header Premium Profesional ========== */
 header.bg-white {
-  background: rgba(255, 255, 255, 0.60) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: var(--blur-lg) saturate(180%);
   -webkit-backdrop-filter: var(--blur-lg) saturate(180%);
   box-shadow: 
-    0 1px 3px rgba(0, 102, 204, 0.06),
-    0 8px 32px rgba(0, 102, 204, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border-bottom: 1px solid rgba(205, 224, 237, 0.4);
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
@@ -225,7 +270,7 @@ header.bg-white::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--gradient-primary);
   opacity: 0;
   transition: opacity var(--transition-slow);
@@ -235,31 +280,31 @@ header.bg-white:hover::before {
   opacity: 1;
 }
 
-/* ========== Logo Institucional ========== */
+/* ========== Logo Mejorado ========== */
 .usta-logo {
-  max-height: 52px;
+  max-height: 56px;
   width: auto;
   cursor: pointer;
-  filter: drop-shadow(0 2px 8px rgba(0, 102, 204, 0.15));
+  filter: drop-shadow(0 3px 10px rgba(0, 102, 204, 0.18));
   transition: all var(--transition-base);
   position: relative;
 }
 
 .usta-logo:hover {
-  transform: scale(1.02) translateY(-1px);
-  filter: drop-shadow(0 4px 16px rgba(0, 163, 204, 0.25));
+  transform: scale(1.03) translateY(-2px);
+  filter: drop-shadow(0 5px 18px rgba(0, 163, 204, 0.28));
 }
 
-/* ========== Navegación Profesional ========== */
+/* ========== Navegación Profesional Premium ========== */
 .navbar {
-  background: rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: var(--blur-md) saturate(180%);
   -webkit-backdrop-filter: var(--blur-md) saturate(180%);
   box-shadow: 
-    0 4px 20px rgba(0, 102, 204, 0.07),
-    0 2px 8px rgba(0, 102, 204, 0.04);
-  border-bottom: 1px solid rgba(205, 224, 237, 0.4);
-  padding: 0.75rem 0;
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: calc(var(--z-sticky) - 1);
@@ -270,11 +315,12 @@ header.bg-white:hover::before {
   font-weight: 600;
   font-size: 0.9375rem;
   color: var(--gray-700) !important;
-  padding: 0.875rem 1.5rem !important;
+  padding: 0.75rem 1.5rem !important;
   margin: 0 0.25rem;
   border-radius: var(--border-radius-lg);
   transition: all var(--transition-base);
-  overflow: hidden;
+  overflow: visible !important;
+  letter-spacing: -0.01em;
 }
 
 .nav-link::after {
@@ -283,7 +329,7 @@ header.bg-white:hover::before {
   bottom: 0;
   left: 50%;
   width: 0;
-  height: 3px;
+  height: 2px;
   background: var(--gradient-primary);
   transform: translateX(-50%);
   transition: width var(--transition-base);
@@ -297,28 +343,445 @@ header.bg-white:hover::before {
 }
 
 .nav-link:hover::after {
-  width: 70%;
+  width: 60%;
 }
 
 .nav-link.active {
   color: white !important;
   background: var(--gradient-primary);
   box-shadow: var(--shadow-primary);
+  font-weight: 700;
 }
 
 .nav-link.active::after {
   display: none;
 }
 
-/* ========== Dropdown Menus Glassmorphism ========== */
-.dropdown-menu {
-  background: rgba(255, 255, 255, 0.75);
+/* ========== SISTEMA DE NOTIFICACIONES SIMPLIFICADO Y FUNCIONAL ========== */
+/* Badge de notificación - DIRECTAMENTE SOBRE LA CAMPANA */
+.nav-link #notifBadge,
+#notifBadge.position-absolute {
+  position: absolute !important;
+  top: -8px !important;
+  right: -8px !important;
+  left: auto !important;
+  transform: translate(50%, 0%) !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  padding: 0 7px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  color: white !important;
+  background: #dc3545 !important;
+  border-radius: var(--border-radius-full) !important;
+  box-shadow: 
+    0 0 0 3px white,
+    0 3px 10px rgba(220, 53, 69, 0.5) !important;
+  z-index: 100 !important;
+  pointer-events: none !important;
+  letter-spacing: 0 !important;
+}
+
+/* Ocultar badge cuando está vacío o tiene clase d-none */
+#notifBadge:empty,
+#notifBadge.d-none {
+  display: none !important;
+}
+
+/* Animación de entrada cuando aparece contenido */
+#notifBadge:not(:empty) {
+  animation: badgeAppear 0.4s var(--ease-bounce);
+}
+
+@keyframes badgeAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulso suave constante para llamar la atención */
+#notifBadge:not(:empty) {
+  animation: badgeAppear 0.4s var(--ease-bounce), badgePulse 2.5s ease-in-out 0.4s infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 0 3px white,
+      0 3px 10px rgba(220, 53, 69, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 
+      0 0 0 3px white,
+      0 4px 14px rgba(220, 53, 69, 0.7);
+  }
+}
+
+/* Icono de campana simple - CON POSICIÓN RELATIVA PARA EL BADGE */
+.nav-link .bi-bell {
+  position: relative !important;
+  font-size: 1.5rem;
+  transition: color var(--transition-base);
+  color: var(--gray-600);
+  display: inline-block;
+  line-height: 1;
+  transform-origin: top center;
+}
+
+.nav-link:hover .bi-bell {
+  color: var(--medical-primary);
+}
+
+/* Animación de campana cuando HAY notificaciones */
+.nav-link:has(#notifBadge:not(:empty):not(.d-none)) .bi-bell {
+  animation: bellRing 2s ease-in-out infinite;
+  color: var(--medical-primary);
+}
+
+@keyframes bellRing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  5%, 15% {
+    transform: rotate(15deg);
+  }
+  10%, 20% {
+    transform: rotate(-15deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  35% {
+    transform: rotate(5deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  45%, 95% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Efecto adicional en hover cuando hay notificaciones */
+.nav-link:has(#notifBadge:not(:empty):not(.d-none)):hover .bi-bell {
+  animation: bellRingFast 0.8s ease-in-out infinite;
+  color: var(--medical-primary-dark);
+}
+
+@keyframes bellRingFast {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  10%, 30% {
+    transform: rotate(20deg) scale(1.1);
+  }
+  20%, 40% {
+    transform: rotate(-20deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Color activo cuando hay notificaciones */
+.nav-link:has(#notifBadge:not(:empty):not(.d-none)) .bi-bell {
+  color: var(--medical-primary);
+  filter: drop-shadow(0 0 8px rgba(0, 102, 204, 0.4));
+}
+
+/* Asegurar que el badge no se corte en pantallas pequeñas */
+@media (max-width: 768px) {
+  .nav-link #notifBadge,
+  #notifBadge.position-absolute {
+    top: -6px !important;
+    right: -6px !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    font-size: 0.7rem !important;
+    padding: 0 6px !important;
+  }
+}
+
+/* Dropdown de notificaciones mejorado */
+.dropdown-menu.notifications-dropdown {
+  min-width: 400px;
+  max-width: 440px;
+  max-height: 520px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: var(--blur-xl) saturate(180%);
   -webkit-backdrop-filter: var(--blur-xl) saturate(180%);
-  border: 1px solid rgba(205, 224, 237, 0.5);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--shadow-2xl);
+  border-radius: var(--border-radius-2xl);
+  padding: 0;
+  animation: notifDropdownFadeIn 0.35s var(--ease-gentle);
+}
+
+@keyframes notifDropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header del dropdown */
+.notifications-dropdown .dropdown-header {
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.04) 0%, rgba(0, 163, 204, 0.04) 100%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--gray-900);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--border-radius-2xl) var(--border-radius-2xl) 0 0;
+}
+
+/* Item de notificación */
+.notification-item {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.125rem;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 var(--border-radius-2xl) var(--border-radius-2xl);
+}
+
+.notification-item:hover {
+  background: rgba(0, 102, 204, 0.04);
+  padding-left: 2rem;
+}
+
+.notification-item.unread {
+  background: linear-gradient(90deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 102, 204, 0.02) 100%);
+  border-left: 4px solid var(--medical-primary);
+}
+
+.notification-item.unread:hover {
+  background: linear-gradient(90deg, rgba(0, 102, 204, 0.10) 0%, rgba(0, 102, 204, 0.04) 100%);
+}
+
+/* Icono de notificación */
+.notification-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 163, 204, 0.1) 100%);
+  color: var(--medical-primary);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.notification-item:hover .notification-icon {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.notification-icon.critical {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.12) 0%, rgba(239, 68, 68, 0.12) 100%);
+  color: var(--status-critical);
+}
+
+.notification-icon.success {
+  background: linear-gradient(135deg, rgba(0, 204, 153, 0.12) 0%, rgba(16, 185, 129, 0.12) 100%);
+  color: var(--medical-tertiary);
+}
+
+.notification-icon.warning {
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.12) 0%, rgba(251, 146, 60, 0.12) 100%);
+  color: var(--accent-warm);
+}
+
+.notification-icon.info {
+  background: linear-gradient(135deg, rgba(0, 163, 204, 0.12) 0%, rgba(14, 165, 233, 0.12) 100%);
+  color: var(--medical-secondary);
+}
+
+/* Contenido de notificación */
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--gray-900);
+  margin-bottom: 0.375rem;
+  line-height: 1.4;
+}
+
+.notification-message {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.notification-time {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.notification-time::before {
+  content: '•';
+  color: var(--gray-400);
+}
+
+/* Footer del dropdown */
+.notifications-dropdown .dropdown-footer {
+  padding: 1.25rem 1.75rem;
+  background: rgba(248, 250, 252, 0.8);
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+  text-align: center;
+  border-radius: 0 0 var(--border-radius-2xl) var(--border-radius-2xl);
+}
+
+.notifications-dropdown .dropdown-footer a {
+  color: var(--medical-primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notifications-dropdown .dropdown-footer a:hover {
+  color: var(--medical-primary-dark);
+  gap: 0.75rem;
+}
+
+/* Estado vacío */
+.notifications-empty {
+  padding: 3.5rem 2rem;
+  text-align: center;
+  color: var(--gray-500);
+}
+
+.notifications-empty .bi {
+  font-size: 3.5rem;
+  color: var(--gray-300);
+  margin-bottom: 1.25rem;
+  opacity: 0.6;
+}
+
+.notifications-empty p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+}
+
+.notifications-empty small {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+}
+
+/* ========== Toast Notifications Mejoradas ========== */
+.toast {
+  border: none;
+  border-radius: var(--border-radius-xl);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: var(--blur-lg) saturate(180%);
+  -webkit-backdrop-filter: var(--blur-lg) saturate(180%);
+  box-shadow: var(--shadow-2xl);
+  animation: toastSlideIn 0.4s var(--ease-gentle);
+  overflow: hidden;
+  min-width: 320px;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(350px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.toast::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  animation: toastProgress 5s linear;
+}
+
+@keyframes toastProgress {
+  from { transform: scaleX(1); transform-origin: left; }
+  to { transform: scaleX(0); transform-origin: left; }
+}
+
+.toast-header {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 163, 204, 0.05) 100%);
+  border-bottom: 1px solid rgba(205, 224, 237, 0.4);
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.toast-body {
+  padding: 1.125rem 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+/* ========== Dropdown Menus Premium Profesionales ========== */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: var(--blur-xl) saturate(180%);
+  -webkit-backdrop-filter: var(--blur-xl) saturate(180%);
+  border: 1px solid rgba(226, 232, 240, 0.8);
   box-shadow: var(--shadow-xl);
   border-radius: var(--border-radius-xl);
-  padding: 0.75rem;
+  padding: 0.5rem;
   margin-top: 0.75rem;
   animation: dropdownFadeIn 0.3s var(--ease-gentle);
 }
@@ -326,22 +789,25 @@ header.bg-white:hover::before {
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-10px) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .dropdown-item {
-  padding: 0.875rem 1.25rem;
+  padding: 0.75rem 1rem;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--gray-700);
   border-radius: var(--border-radius-md);
   transition: all var(--transition-base);
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .dropdown-item::before {
@@ -353,124 +819,196 @@ header.bg-white:hover::before {
   width: 0;
   background: var(--gradient-primary);
   transition: width var(--transition-base);
-  border-radius: 0 4px 4px 0;
+  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
 }
 
 .dropdown-item:hover {
   background: rgba(0, 102, 204, 0.06);
   color: var(--medical-primary);
-  padding-left: 1.5rem;
+  padding-left: 1.25rem;
   transform: translateX(2px);
 }
 
 .dropdown-item:hover::before {
-  width: 4px;
+  width: 3px;
 }
 
 .dropdown-item.active {
   background: var(--gradient-primary);
   color: white;
   font-weight: 600;
-  box-shadow: var(--shadow-primary);
+  box-shadow: var(--shadow-sm);
 }
 
-/* ========== Sistema de Notificaciones ========== */
-#notifBadge {
-  font-size: 0.625rem;
-  font-weight: 700;
-  padding: 0 6px;
-  min-width: 20px;
-  height: 20px;
-  line-height: 20px;
-  transform: translate(-90%, -10%);
-  background: linear-gradient(135deg, #cc3333 0%, #ff9933 100%);
-  box-shadow: 
-    0 0 0 3px rgba(204, 51, 51, 0.2),
-    0 4px 12px rgba(204, 51, 51, 0.4);
-  animation: pulseBadge 2.5s ease-in-out infinite;
+.dropdown-item.active::before {
+  width: 0;
 }
 
-@keyframes pulseBadge {
-  0%, 100% {
-    transform: translate(-90%, -10%) scale(1);
-  }
-  50% {
-    transform: translate(-90%, -10%) scale(1.05);
-    box-shadow: 
-      0 0 0 5px rgba(204, 51, 51, 0.15),
-      0 6px 20px rgba(204, 51, 51, 0.5);
-  }
+.dropdown-divider {
+  height: 0;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-.nav-link .bi-bell {
-  font-size: 1.5rem;
-  transition: all var(--transition-base);
-  color: var(--gray-600);
-}
-
-.nav-link:hover .bi-bell {
-  animation: bellRing 0.6s var(--ease-gentle);
-  color: var(--medical-primary);
-}
-
-@keyframes bellRing {
-  0%, 100% { transform: rotate(0deg); }
-  20%, 60% { transform: rotate(-5deg); }
-  40%, 80% { transform: rotate(5deg); }
-}
-
-/* ========== Toast Notifications ========== */
-.toast {
-  border: none;
-  border-radius: var(--border-radius-xl);
-  background: rgba(255, 255, 255, 0.85);
+/* ========== Cards Glassmorphism Premium Profesional ========== */
+.card {
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: var(--blur-lg) saturate(180%);
   -webkit-backdrop-filter: var(--blur-lg) saturate(180%);
-  box-shadow: var(--shadow-2xl);
-  animation: toastSlide 0.4s var(--ease-gentle);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: var(--border-radius-2xl);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-slow), background-color var(--transition-slow), border-color var(--transition-slow), transform var(--transition-base);
   overflow: hidden;
+  position: relative;
+  will-change: box-shadow, background-color;
 }
 
-@keyframes toastSlide {
-  from {
-    opacity: 0;
-    transform: translateX(250px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.toast::before {
+.card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 4px;
   background: var(--gradient-primary);
-  animation: progressBar 5s linear;
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
 
-@keyframes progressBar {
-  from { transform: scaleX(1); transform-origin: left; }
-  to { transform: scaleX(0); transform-origin: left; }
+.card:hover {
+  box-shadow: var(--shadow-xl);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(0, 102, 204, 0.2);
+  transform: translateY(-4px);
 }
 
-/* ========== Botones Premium - Colores Sólidos con !important ========== */
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.04) 0%, rgba(0, 163, 204, 0.04) 100%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 1.5rem 1.75rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--gray-900);
+}
+
+.card-body {
+  padding: 1.75rem;
+}
+
+.card-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.875rem;
+  line-height: 1.3;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+/* Iconos en Cards mejorados */
+.card .bi {
+  font-size: 2.75rem;
+  color: var(--medical-primary);
+  transition: all var(--transition-base);
+  filter: drop-shadow(0 4px 12px rgba(0, 102, 204, 0.22));
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.card:hover .bi {
+  color: var(--medical-secondary);
+  transform: scale(1.1) translateY(-4px);
+  filter: drop-shadow(0 6px 18px rgba(0, 163, 204, 0.35));
+}
+
+/* Iconos específicos con colores armónicos */
+.card .bi-heart,
+.card .bi-heart-pulse,
+.card .bi-heartbeat {
+  color: var(--status-critical);
+}
+
+.card:hover .bi-heart,
+.card:hover .bi-heart-pulse,
+.card:hover .bi-heartbeat {
+  color: #b82e3e;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { 
+    transform: scale(1.1) translateY(-4px); 
+  }
+  14%, 42% { 
+    transform: scale(1.15) translateY(-5px); 
+  }
+  28%, 56% { 
+    transform: scale(1.1) translateY(-4px); 
+  }
+}
+
+.card .bi-activity,
+.card .bi-graph-up,
+.card .bi-clipboard-pulse {
+  color: var(--medical-secondary);
+}
+
+.card:hover .bi-activity,
+.card:hover .bi-graph-up,
+.card:hover .bi-clipboard-pulse {
+  color: var(--medical-secondary-dark);
+}
+
+.card .bi-calendar-check,
+.card .bi-calendar-event,
+.card .bi-clock-history {
+  color: var(--medical-primary);
+}
+
+.card:hover .bi-calendar-check,
+.card:hover .bi-calendar-event,
+.card:hover .bi-clock-history {
+  color: var(--medical-primary-dark);
+}
+
+.card .bi-hospital,
+.card .bi-bandaid,
+.card .bi-capsule {
+  color: var(--medical-tertiary);
+}
+
+.card:hover .bi-hospital,
+.card:hover .bi-bandaid,
+.card:hover .bi-capsule {
+  color: var(--medical-tertiary-dark);
+}
+
+/* ========== Botones Premium Optimizados ========== */
 .btn {
   font-weight: 600 !important;
+  font-size: 1rem !important;
   border-radius: var(--border-radius-lg) !important;
   padding: 0.875rem 2rem !important;
   transition: all var(--transition-base) !important;
   border: 2px solid transparent !important;
   position: relative !important;
   overflow: hidden !important;
-  letter-spacing: 0.02em !important;
+  letter-spacing: -0.01em !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
   background-image: none !important;
   text-shadow: none !important;
+  line-height: 1.5 !important;
 }
 
 .btn::before {
@@ -480,7 +1018,7 @@ header.bg-white:hover::before {
   left: -100% !important;
   width: 100% !important;
   height: 100% !important;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent) !important;
   transition: left var(--transition-slow) !important;
 }
 
@@ -497,11 +1035,10 @@ header.bg-white:hover::before {
   transform: translateY(-1px) scale(0.98) !important;
 }
 
-/* Botón Primary - Azul Sólido */
+/* Botón Primary */
 .btn-primary {
   background: #0066cc !important;
   background-color: #0066cc !important;
-  background-image: none !important;
   color: white !important;
   border-color: #004d99 !important;
 }
@@ -511,7 +1048,6 @@ header.bg-white:hover::before {
 .btn-primary:active {
   background: #0052a3 !important;
   background-color: #0052a3 !important;
-  background-image: none !important;
   border-color: #003366 !important;
   color: white !important;
   box-shadow: 
@@ -519,11 +1055,10 @@ header.bg-white:hover::before {
     0 8px 20px rgba(0, 102, 204, 0.3) !important;
 }
 
-/* Botón Success - Verde-Azulado Sólido */
+/* Botón Success */
 .btn-success {
   background: #00cc99 !important;
   background-color: #00cc99 !important;
-  background-image: none !important;
   color: white !important;
   border-color: #00a37a !important;
 }
@@ -533,7 +1068,6 @@ header.bg-white:hover::before {
 .btn-success:active {
   background: #00b386 !important;
   background-color: #00b386 !important;
-  background-image: none !important;
   border-color: #008c6b !important;
   color: white !important;
   box-shadow: 
@@ -541,11 +1075,10 @@ header.bg-white:hover::before {
     0 8px 20px rgba(0, 204, 153, 0.3) !important;
 }
 
-/* Botón Info - Turquesa Sólido */
+/* Botón Info */
 .btn-info {
   background: #00a3cc !important;
   background-color: #00a3cc !important;
-  background-image: none !important;
   color: white !important;
   border-color: #0082a3 !important;
 }
@@ -555,7 +1088,6 @@ header.bg-white:hover::before {
 .btn-info:active {
   background: #008fb3 !important;
   background-color: #008fb3 !important;
-  background-image: none !important;
   border-color: #006b8c !important;
   color: white !important;
   box-shadow: 
@@ -563,11 +1095,10 @@ header.bg-white:hover::before {
     0 8px 20px rgba(0, 163, 204, 0.3) !important;
 }
 
-/* Botón Warning - Naranja Sólido */
+/* Botón Warning */
 .btn-warning {
   background: #ff9933 !important;
   background-color: #ff9933 !important;
-  background-image: none !important;
   color: white !important;
   border-color: #e68a2e !important;
 }
@@ -577,7 +1108,6 @@ header.bg-white:hover::before {
 .btn-warning:active {
   background: #ff8c1f !important;
   background-color: #ff8c1f !important;
-  background-image: none !important;
   border-color: #cc7519 !important;
   color: white !important;
   box-shadow: 
@@ -585,33 +1115,30 @@ header.bg-white:hover::before {
     0 8px 20px rgba(255, 153, 51, 0.3) !important;
 }
 
-/* Botón Danger - Rojo Sólido */
+/* Botón Danger */
 .btn-danger {
-  background: #cc3333 !important;
-  background-color: #cc3333 !important;
-  background-image: none !important;
+  background: #dc3545 !important;
+  background-color: #dc3545 !important;
   color: white !important;
-  border-color: #a32929 !important;
+  border-color: #c82333 !important;
 }
 
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active {
-  background: #b32d2d !important;
-  background-color: #b32d2d !important;
-  background-image: none !important;
-  border-color: #8c2222 !important;
+  background: #c82333 !important;
+  background-color: #c82333 !important;
+  border-color: #bd2130 !important;
   color: white !important;
   box-shadow: 
-    0 0 0 4px rgba(204, 51, 51, 0.2),
-    0 8px 20px rgba(204, 51, 51, 0.3) !important;
+    0 0 0 4px rgba(220, 53, 69, 0.2),
+    0 8px 20px rgba(220, 53, 69, 0.3) !important;
 }
 
-/* Botón Secondary - Gris-Azulado Sólido */
+/* Botón Secondary */
 .btn-secondary {
   background: #6b95b8 !important;
   background-color: #6b95b8 !important;
-  background-image: none !important;
   color: white !important;
   border-color: #577a99 !important;
 }
@@ -621,7 +1148,6 @@ header.bg-white:hover::before {
 .btn-secondary:active {
   background: #5a7fa3 !important;
   background-color: #5a7fa3 !important;
-  background-image: none !important;
   border-color: #496680 !important;
   color: white !important;
   box-shadow: 
@@ -629,11 +1155,10 @@ header.bg-white:hover::before {
     0 8px 20px rgba(107, 149, 184, 0.3) !important;
 }
 
-/* Botón Light - Blanco con borde */
+/* Botón Light */
 .btn-light {
   background: #ffffff !important;
   background-color: #ffffff !important;
-  background-image: none !important;
   color: #0066cc !important;
   border-color: #cde0ed !important;
 }
@@ -643,7 +1168,6 @@ header.bg-white:hover::before {
 .btn-light:active {
   background: #f8fbfd !important;
   background-color: #f8fbfd !important;
-  background-image: none !important;
   border-color: #a0c1d9 !important;
   color: #004d99 !important;
   box-shadow: 
@@ -651,11 +1175,10 @@ header.bg-white:hover::before {
     0 8px 20px rgba(0, 102, 204, 0.15) !important;
 }
 
-/* Botón Dark - Azul Oscuro Sólido */
+/* Botón Dark */
 .btn-dark {
   background: #1f3352 !important;
   background-color: #1f3352 !important;
-  background-image: none !important;
   color: white !important;
   border-color: #0f1a2e !important;
 }
@@ -665,7 +1188,6 @@ header.bg-white:hover::before {
 .btn-dark:active {
   background: #162740 !important;
   background-color: #162740 !important;
-  background-image: none !important;
   border-color: #0a111f !important;
   color: white !important;
   box-shadow: 
@@ -673,11 +1195,9 @@ header.bg-white:hover::before {
     0 8px 20px rgba(31, 51, 82, 0.3) !important;
 }
 
-/* Botones Outline - Variantes con bordes */
+/* Botones Outline */
 .btn-outline-primary {
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   color: #0066cc !important;
   border: 2px solid #0066cc !important;
 }
@@ -686,19 +1206,12 @@ header.bg-white:hover::before {
 .btn-outline-primary:focus,
 .btn-outline-primary:active {
   background: #0066cc !important;
-  background-color: #0066cc !important;
-  background-image: none !important;
   color: white !important;
   border-color: #004d99 !important;
-  box-shadow: 
-    0 0 0 4px rgba(0, 102, 204, 0.15),
-    0 8px 20px rgba(0, 102, 204, 0.25) !important;
 }
 
 .btn-outline-success {
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   color: #00cc99 !important;
   border: 2px solid #00cc99 !important;
 }
@@ -707,19 +1220,12 @@ header.bg-white:hover::before {
 .btn-outline-success:focus,
 .btn-outline-success:active {
   background: #00cc99 !important;
-  background-color: #00cc99 !important;
-  background-image: none !important;
   color: white !important;
   border-color: #00a37a !important;
-  box-shadow: 
-    0 0 0 4px rgba(0, 204, 153, 0.15),
-    0 8px 20px rgba(0, 204, 153, 0.25) !important;
 }
 
 .btn-outline-info {
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   color: #00a3cc !important;
   border: 2px solid #00a3cc !important;
 }
@@ -728,19 +1234,12 @@ header.bg-white:hover::before {
 .btn-outline-info:focus,
 .btn-outline-info:active {
   background: #00a3cc !important;
-  background-color: #00a3cc !important;
-  background-image: none !important;
   color: white !important;
   border-color: #0082a3 !important;
-  box-shadow: 
-    0 0 0 4px rgba(0, 163, 204, 0.15),
-    0 8px 20px rgba(0, 163, 204, 0.25) !important;
 }
 
 .btn-outline-warning {
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   color: #ff9933 !important;
   border: 2px solid #ff9933 !important;
 }
@@ -749,147 +1248,33 @@ header.bg-white:hover::before {
 .btn-outline-warning:focus,
 .btn-outline-warning:active {
   background: #ff9933 !important;
-  background-color: #ff9933 !important;
-  background-image: none !important;
   color: white !important;
   border-color: #e68a2e !important;
-  box-shadow: 
-    0 0 0 4px rgba(255, 153, 51, 0.15),
-    0 8px 20px rgba(255, 153, 51, 0.25) !important;
 }
 
 .btn-outline-danger {
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  color: #cc3333 !important;
-  border: 2px solid #cc3333 !important;
+  color: #dc3545 !important;
+  border: 2px solid #dc3545 !important;
 }
 
 .btn-outline-danger:hover,
 .btn-outline-danger:focus,
 .btn-outline-danger:active {
-  background: #cc3333 !important;
-  background-color: #cc3333 !important;
-  background-image: none !important;
+  background: #dc3545 !important;
   color: white !important;
-  border-color: #a32929 !important;
-  box-shadow: 
-    0 0 0 4px rgba(204, 51, 51, 0.15),
-    0 8px 20px rgba(204, 51, 51, 0.25) !important;
+  border-color: #c82333 !important;
 }
 
-/* ========== Cards Glassmorphism Premium ========== */
-.card {
-  background: rgba(255, 255, 255, 0.70);
-  backdrop-filter: var(--blur-lg) saturate(180%);
-  -webkit-backdrop-filter: var(--blur-lg) saturate(180%);
-  border: 1px solid rgba(205, 224, 237, 0.5);
-  border-radius: var(--border-radius-2xl);
-  box-shadow: var(--shadow-lg);
-  transition: all var(--transition-slow);
-  overflow: hidden;
-  position: relative;
+/* Tamaños de botones */
+.btn-sm {
+  padding: 0.625rem 1.25rem !important;
+  font-size: 0.875rem !important;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-}
-
-.card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: var(--shadow-xl);
-  background: rgba(255, 255, 255, 0.82);
-  border-color: rgba(0, 102, 204, 0.25);
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-/* Iconos en Cards - COLORES ARMÓNICOS */
-.card .bi {
-  font-size: 2.5rem;
-  color: var(--medical-primary);
-  transition: all var(--transition-base);
-  filter: drop-shadow(0 4px 12px rgba(0, 102, 204, 0.2));
-  display: inline-block;
-}
-
-.card:hover .bi {
-  color: var(--medical-secondary);
-  transform: scale(1.08) translateY(-3px);
-  filter: drop-shadow(0 6px 18px rgba(0, 163, 204, 0.3));
-}
-
-/* Iconos específicos con colores de la paleta armónica */
-.card .bi-heart,
-.card .bi-heart-pulse,
-.card .bi-heartbeat {
-  color: #cc3333; /* Status critical */
-}
-
-.card:hover .bi-heart,
-.card:hover .bi-heart-pulse,
-.card:hover .bi-heartbeat {
-  color: #992626;
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { 
-    transform: scale(1.08) translateY(-3px); 
-  }
-  14%, 42% { 
-    transform: scale(1.12) translateY(-4px); 
-  }
-  28%, 56% { 
-    transform: scale(1.08) translateY(-3px); 
-  }
-}
-
-.card .bi-activity,
-.card .bi-graph-up,
-.card .bi-clipboard-pulse {
-  color: var(--medical-secondary); /* Turquesa */
-}
-
-.card:hover .bi-activity,
-.card:hover .bi-graph-up,
-.card:hover .bi-clipboard-pulse {
-  color: var(--medical-secondary-dark);
-}
-
-.card .bi-calendar-check,
-.card .bi-calendar-event,
-.card .bi-clock-history {
-  color: var(--medical-primary); /* Azul principal */
-}
-
-.card:hover .bi-calendar-check,
-.card:hover .bi-calendar-event,
-.card:hover .bi-clock-history {
-  color: var(--medical-primary-dark);
-}
-
-.card .bi-hospital,
-.card .bi-bandaid,
-.card .bi-capsule {
-  color: var(--medical-tertiary); /* Verde-azulado */
-}
-
-.card:hover .bi-hospital,
-.card:hover .bi-bandaid,
-.card:hover .bi-capsule {
-  color: var(--medical-tertiary-dark);
+.btn-lg {
+  padding: 1.125rem 2.5rem !important;
+  font-size: 1.125rem !important;
 }
 
 /* ========== Formularios Profesionales ========== */
@@ -899,35 +1284,53 @@ header.bg-white:hover::before {
   border-radius: var(--border-radius-lg);
   padding: 0.875rem 1.25rem;
   transition: all var(--transition-base);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.90);
   backdrop-filter: var(--blur-sm);
   box-shadow: var(--shadow-xs);
   color: var(--gray-800);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .form-control:focus,
 .form-select:focus {
   border-color: var(--medical-primary);
   box-shadow: 
-    0 0 0 3px rgba(0, 102, 204, 0.10),
+    0 0 0 4px rgba(0, 102, 204, 0.12),
     var(--shadow-md);
   background: white;
   outline: none;
 }
 
+.form-control::placeholder {
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
 .form-label {
   color: var(--gray-700);
   font-weight: 600;
+  font-size: 0.9375rem;
   margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
 }
 
-/* ========== Tablas Médicas ========== */
+.form-text {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-top: 0.375rem;
+  line-height: 1.5;
+}
+
+/* ========== Tablas Médicas Mejoradas - SIN TRANSFORM ========== */
 .table {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: var(--blur-md);
   border-radius: var(--border-radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
+  font-size: 0.9375rem;
 }
 
 .table thead {
@@ -935,35 +1338,49 @@ header.bg-white:hover::before {
 }
 
 .table thead th {
-  color: var(--gray-700);
+  color: var(--gray-800);
   font-weight: 700;
-  border-bottom: 2px solid rgba(0, 102, 204, 0.15);
-  padding: 1rem;
+  font-size: 1rem;
+  border-bottom: 2px solid rgba(0, 102, 204, 0.18);
+  padding: 1.125rem 1rem;
+  letter-spacing: -0.01em;
 }
 
 .table tbody tr {
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
   border-bottom: 1px solid rgba(205, 224, 237, 0.5);
+  will-change: background-color;
 }
 
 .table tbody tr:hover {
-  background: rgba(0, 102, 204, 0.04);
-  transform: scale(1.002);
+  background: rgba(0, 102, 204, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.08);
 }
 
 .table tbody td {
-  padding: 0.875rem 1rem;
+  padding: 1rem;
   color: var(--gray-700);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-/* ========== Badges Médicos - Paleta Armónica ========== */
+.table-striped tbody tr:nth-of-type(odd) {
+  background: rgba(0, 102, 204, 0.02);
+}
+
+.table-striped tbody tr:nth-of-type(odd):hover {
+  background: rgba(0, 102, 204, 0.06);
+}
+
+/* ========== Badges Médicos Mejorados ========== */
 .badge {
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius-full);
   font-weight: 600;
   font-size: 0.875rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   box-shadow: var(--shadow-sm);
+  line-height: 1.4;
 }
 
 .badge-primary {
@@ -984,10 +1401,11 @@ header.bg-white:hover::before {
   box-shadow: 0 4px 12px rgba(0, 163, 204, 0.3);
 }
 
-.badge-critical {
-  background: linear-gradient(135deg, #cc3333 0%, #992626 100%);
+.badge-critical,
+.badge-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
   color: white;
-  box-shadow: 0 4px 12px rgba(204, 51, 51, 0.3);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
 .badge-warning {
@@ -996,51 +1414,72 @@ header.bg-white:hover::before {
   box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3);
 }
 
-/* ========== Alerts Médicos ========== */
+.badge-secondary {
+  background: linear-gradient(135deg, #6b95b8 0%, #577a99 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(107, 149, 184, 0.3);
+}
+
+.badge-light {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+}
+
+.badge-dark {
+  background: linear-gradient(135deg, #1f3352 0%, #0f1a2e 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(31, 51, 82, 0.3);
+}
+
+/* ========== Alerts Médicos Mejorados ========== */
 .alert {
   border-radius: var(--border-radius-lg);
   border: none;
   backdrop-filter: var(--blur-sm);
   box-shadow: var(--shadow-md);
+  padding: 1.125rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .alert-primary {
-  background: rgba(0, 102, 204, 0.10);
+  background: rgba(0, 102, 204, 0.12);
   color: var(--medical-primary-darker);
   border-left: 4px solid var(--medical-primary);
 }
 
 .alert-success {
-  background: rgba(0, 204, 153, 0.10);
+  background: rgba(0, 204, 153, 0.12);
   color: #007a59;
   border-left: 4px solid var(--medical-tertiary);
 }
 
 .alert-info {
-  background: rgba(0, 163, 204, 0.10);
+  background: rgba(0, 163, 204, 0.12);
   color: #006b8c;
   border-left: 4px solid var(--medical-secondary);
 }
 
 .alert-warning {
-  background: rgba(255, 153, 51, 0.10);
+  background: rgba(255, 153, 51, 0.12);
   color: #cc7a29;
   border-left: 4px solid var(--accent-warm);
 }
 
 .alert-danger {
-  background: rgba(204, 51, 51, 0.10);
-  color: #992626;
+  background: rgba(220, 53, 69, 0.12);
+  color: #b82e3e;
   border-left: 4px solid var(--status-critical);
 }
 
-/* ========== Progress Bars ========== */
+/* ========== Progress Bars Mejorados ========== */
 .progress {
-  height: 1rem;
+  height: 1.125rem;
   border-radius: var(--border-radius-full);
   background: rgba(205, 224, 237, 0.4);
   backdrop-filter: var(--blur-sm);
-  box-shadow: inset 0 2px 4px rgba(0, 102, 204, 0.06);
+  box-shadow: inset 0 2px 4px rgba(0, 102, 204, 0.08);
   overflow: hidden;
 }
 
@@ -1048,6 +1487,9 @@ header.bg-white:hover::before {
   background: var(--gradient-primary);
   box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
   transition: width var(--transition-slow);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
 }
 
 .progress-bar-success {
@@ -1060,43 +1502,22 @@ header.bg-white:hover::before {
   box-shadow: 0 2px 8px rgba(0, 163, 204, 0.3);
 }
 
-/* ========== Scrollbar Personalizado ========== */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+.progress-bar-warning {
+  background: linear-gradient(135deg, #ff9933 0%, #ffad5c 100%);
+  box-shadow: 0 2px 8px rgba(255, 153, 51, 0.3);
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(240, 246, 250, 0.5);
-  border-radius: 10px;
+.progress-bar-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--gradient-primary);
-  border-radius: 10px;
-  transition: all var(--transition-base);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #004d99 0%, #007a99 100%);
-}
-
-/* ========== Spinners de Carga ========== */
-.spinner-border {
-  border-color: rgba(0, 102, 204, 0.2);
-  border-right-color: var(--medical-primary);
-}
-
-.spinner-grow {
-  background-color: var(--medical-primary);
-}
-
-/* ========== Modals Premium ========== */
+/* ========== Modals Premium Mejorados ========== */
 .modal-content {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: var(--blur-xl) saturate(180%);
   -webkit-backdrop-filter: var(--blur-xl) saturate(180%);
-  border: 1px solid rgba(205, 224, 237, 0.5);
+  border: 1px solid rgba(205, 224, 237, 0.6);
   border-radius: var(--border-radius-2xl);
   box-shadow: var(--shadow-2xl);
   overflow: hidden;
@@ -1105,289 +1526,164 @@ header.bg-white:hover::before {
 .modal-header {
   background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 163, 204, 0.06) 100%);
   border-bottom: 1px solid rgba(205, 224, 237, 0.5);
-  padding: 1.5rem;
+  padding: 1.5rem 1.75rem;
 }
 
 .modal-title {
   color: var(--medical-primary);
   font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
 .modal-body {
-  padding: 1.5rem;
+  padding: 1.75rem;
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.65;
 }
 
 .modal-footer {
   border-top: 1px solid rgba(205, 224, 237, 0.5);
-  padding: 1rem 1.5rem;
+  padding: 1.25rem 1.75rem;
+  background: rgba(248, 251, 253, 0.5);
 }
 
-/* ========== Tooltips Médicos ========== */
-.tooltip-inner {
-  background: rgba(31, 51, 82, 0.95);
-  backdrop-filter: var(--blur-md);
-  border-radius: var(--border-radius-md);
-  padding: 0.5rem 0.875rem;
-  box-shadow: var(--shadow-lg);
-  font-size: 0.875rem;
-  font-weight: 500;
+/* ========== Scrollbar Personalizado Mejorado ========== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
-/* ========== Breadcrumbs ========== */
-.breadcrumb {
-  background: rgba(255, 255, 255, 0.70);
-  backdrop-filter: var(--blur-md);
-  border-radius: var(--border-radius-lg);
-  padding: 0.75rem 1.25rem;
-  box-shadow: var(--shadow-sm);
+::-webkit-scrollbar-track {
+  background: rgba(240, 246, 250, 0.6);
+  border-radius: 10px;
 }
 
-.breadcrumb-item {
-  color: var(--gray-600);
-  font-weight: 500;
-}
-
-.breadcrumb-item.active {
-  color: var(--medical-primary);
-  font-weight: 600;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-  color: var(--gray-400);
-}
-
-.breadcrumb-item a {
-  color: var(--medical-primary);
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.breadcrumb-item a:hover {
-  color: var(--medical-primary-dark);
-  text-decoration: underline;
-}
-
-/* ========== Pagination ========== */
-.pagination {
-  gap: 0.5rem;
-}
-
-.page-link {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: var(--blur-sm);
-  border: 1px solid rgba(205, 224, 237, 0.5);
-  border-radius: var(--border-radius-md);
-  color: var(--gray-700);
-  font-weight: 600;
-  padding: 0.5rem 0.875rem;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-xs);
-}
-
-.page-link:hover {
-  background: rgba(0, 102, 204, 0.08);
-  color: var(--medical-primary);
-  border-color: rgba(0, 102, 204, 0.2);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-
-.page-item.active .page-link {
+::-webkit-scrollbar-thumb {
   background: var(--gradient-primary);
-  border-color: transparent;
-  color: white;
-  box-shadow: var(--shadow-primary);
-}
-
-.page-item.disabled .page-link {
-  background: rgba(255, 255, 255, 0.5);
-  color: var(--gray-400);
-  border-color: rgba(205, 224, 237, 0.3);
-}
-
-/* ========== List Groups ========== */
-.list-group {
-  border-radius: var(--border-radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-
-.list-group-item {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: var(--blur-sm);
-  border: none;
-  border-bottom: 1px solid rgba(205, 224, 237, 0.5);
-  color: var(--gray-700);
-  padding: 1rem 1.25rem;
-  transition: all var(--transition-fast);
-}
-
-.list-group-item:hover {
-  background: rgba(0, 102, 204, 0.04);
-  transform: translateX(4px);
-  padding-left: 1.5rem;
-}
-
-.list-group-item.active {
-  background: var(--gradient-primary);
-  color: white;
-  font-weight: 600;
-  box-shadow: var(--shadow-primary);
-  border-color: transparent;
-}
-
-.list-group-item:first-child {
-  border-top: none;
-}
-
-.list-group-item:last-child {
-  border-bottom: none;
-}
-
-/* ========== Accordion Médico ========== */
-.accordion {
-  border-radius: var(--border-radius-xl);
-  overflow: hidden;
-}
-
-.accordion-item {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: var(--blur-md);
-  border: 1px solid rgba(205, 224, 237, 0.5);
-  margin-bottom: 0.75rem;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  border-radius: 10px;
+  border: 2px solid rgba(240, 246, 250, 0.6);
   transition: all var(--transition-base);
 }
 
-.accordion-item:hover {
-  box-shadow: var(--shadow-md);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #004d99 0%, #007a99 100%);
+  border: 2px solid rgba(240, 246, 250, 0.4);
 }
 
-.accordion-button {
-  background: transparent;
-  color: var(--gray-800);
-  font-weight: 600;
-  padding: 1.25rem;
-  transition: all var(--transition-base);
-}
-
-.accordion-button:not(.collapsed) {
-  background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 163, 204, 0.06) 100%);
-  color: var(--medical-primary);
-  box-shadow: none;
-}
-
-.accordion-button:focus {
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.10);
-  border-color: rgba(0, 102, 204, 0.2);
-}
-
-.accordion-body {
-  padding: 1.25rem;
-  color: var(--gray-700);
-}
-
-/* ========== Tabs Médicas ========== */
-.nav-tabs {
-  border-bottom: 2px solid rgba(205, 224, 237, 0.5);
-  gap: 0.5rem;
-}
-
-.nav-tabs .nav-link {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: var(--blur-sm);
-  border: 1px solid rgba(205, 224, 237, 0.5);
-  border-bottom: none;
-  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
-  color: var(--gray-700);
-  font-weight: 600;
-  padding: 0.875rem 1.5rem;
-  transition: all var(--transition-base);
-  margin: 0;
-}
-
-.nav-tabs .nav-link:hover {
-  background: rgba(0, 102, 204, 0.06);
-  color: var(--medical-primary);
-  border-color: rgba(0, 102, 204, 0.2);
-}
-
-.nav-tabs .nav-link.active {
-  background: white;
-  color: var(--medical-primary);
-  border-color: rgba(0, 102, 204, 0.2);
-  border-bottom: 3px solid var(--medical-primary);
-  margin-bottom: -2px;
-}
-
-.tab-content {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: var(--blur-md);
-  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) var(--border-radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-md);
-}
-
-/* ========== Responsive Design ========== */
+/* ========== Responsive Design Mejorado ========== */
 @media (max-width: 992px) {
   header.bg-white,
   .navbar {
-    background: rgba(255, 255, 255, 0.75) !important;
+    background: rgba(255, 255, 255, 0.82) !important;
   }
   
   .card {
-    background: rgba(255, 255, 255, 0.80);
+    background: rgba(255, 255, 255, 0.85);
   }
   
   .nav-link {
-    padding: 0.75rem 1.25rem !important;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 0.9375rem;
+  }
+  
+  .notifications-dropdown {
+    min-width: 340px;
   }
 }
 
 @media (max-width: 768px) {
+  body {
+    font-size: 0.9375rem;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  
   header.bg-white,
   .navbar {
-    background: rgba(255, 255, 255, 0.85) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
   }
   
   .card {
-    background: rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.94);
   }
   
   .usta-logo {
-    max-height: 42px;
+    max-height: 48px;
   }
   
   .nav-link {
-    padding: 0.625rem 1rem !important;
+    padding: 0.75rem 1.25rem !important;
     margin: 0.25rem 0;
+    font-size: 0.9375rem;
   }
   
   .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.9375rem !important;
   }
   
   .card .bi {
-    font-size: 2rem;
+    font-size: 2.25rem;
+  }
+  
+  .notifications-dropdown {
+    min-width: 300px;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  #notifBadge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.65rem;
+    padding: 0 6px;
+  }
+  
+  /* Reducir intensidad de animación en móviles */
+  .nav-link:has(#notifBadge:not(:empty):not(.d-none)) .bi-bell {
+    animation: bellRingMobile 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes bellRingMobile {
+    0%, 100% { transform: rotate(0deg); }
+    5%, 15% { transform: rotate(10deg); }
+    10%, 20% { transform: rotate(-10deg); }
+    25%, 95% { transform: rotate(0deg); }
   }
 }
 
 @media (max-width: 576px) {
   body::after {
     background: linear-gradient(180deg, 
-      rgba(248, 252, 255, 0.60) 0%, 
-      rgba(243, 250, 253, 0.70) 50%,
-      rgba(238, 248, 252, 0.75) 100%);
+      rgba(255, 255, 255, 0.88) 0%, 
+      rgba(248, 252, 255, 0.90) 50%,
+      rgba(243, 250, 253, 0.92) 100%);
   }
   
   .dropdown-menu {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.96);
   }
   
   .modal-content {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+  }
+  
+  .notifications-dropdown {
+    min-width: 280px;
+  }
+  
+  .notification-item {
+    padding: 1rem 1.25rem;
+  }
+  
+  .notification-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 1.125rem;
   }
 }
 
@@ -1397,6 +1693,7 @@ header.bg-white:hover::before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 700;
 }
 
 .text-gradient-secondary {
@@ -1404,82 +1701,33 @@ header.bg-white:hover::before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 700;
 }
 
-.text-gradient-tertiary {
-  background: var(--gradient-tertiary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.text-medical-primary { color: var(--medical-primary); }
+.text-medical-secondary { color: var(--medical-secondary); }
+.text-medical-tertiary { color: var(--medical-tertiary); }
 
-.text-medical-primary {
-  color: var(--medical-primary);
-}
+.bg-medical-primary { background-color: var(--medical-primary); }
+.bg-medical-secondary { background-color: var(--medical-secondary); }
+.bg-medical-tertiary { background-color: var(--medical-tertiary); }
 
-.text-medical-secondary {
-  color: var(--medical-secondary);
-}
-
-.text-medical-tertiary {
-  color: var(--medical-tertiary);
-}
-
-.bg-medical-primary {
-  background-color: var(--medical-primary);
-}
-
-.bg-medical-secondary {
-  background-color: var(--medical-secondary);
-}
-
-.bg-medical-tertiary {
-  background-color: var(--medical-tertiary);
-}
-
-.bg-gradient-primary {
-  background: var(--gradient-primary);
-}
-
-.bg-gradient-secondary {
-  background: var(--gradient-secondary);
-}
-
-.bg-gradient-tertiary {
-  background: var(--gradient-tertiary);
-}
-
-.bg-gradient-hero {
-  background: var(--gradient-hero);
-}
+.bg-gradient-primary { background: var(--gradient-primary); }
+.bg-gradient-secondary { background: var(--gradient-secondary); }
+.bg-gradient-tertiary { background: var(--gradient-tertiary); }
 
 .glass-effect {
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.80);
   backdrop-filter: var(--blur-lg) saturate(180%);
   -webkit-backdrop-filter: var(--blur-lg) saturate(180%);
-  border: 1px solid rgba(205, 224, 237, 0.5);
-}
-
-.glass-effect-strong {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: var(--blur-xl) saturate(180%);
-  -webkit-backdrop-filter: var(--blur-xl) saturate(180%);
   border: 1px solid rgba(205, 224, 237, 0.6);
 }
 
-.shadow-medical {
-  box-shadow: var(--shadow-primary);
-}
+.shadow-medical { box-shadow: var(--shadow-primary); }
+.shadow-secondary { box-shadow: var(--shadow-secondary); }
+.shadow-tertiary { box-shadow: var(--shadow-tertiary); }
 
-.shadow-secondary {
-  box-shadow: var(--shadow-secondary);
-}
-
-.shadow-tertiary {
-  box-shadow: var(--shadow-tertiary);
-}
-
-/* ========== Animaciones Adicionales ========== */
+/* ========== Animaciones Mejoradas ========== */
 @keyframes fadeIn {
   from { 
     opacity: 0; 
@@ -1513,41 +1761,9 @@ header.bg-white:hover::before {
   }
 }
 
-@keyframes scaleIn {
-  from { 
-    opacity: 0; 
-    transform: scale(0.95); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.6s var(--ease-gentle);
-}
-
-.slide-in-left {
-  animation: slideInLeft 0.6s var(--ease-gentle);
-}
-
-.slide-in-right {
-  animation: slideInRight 0.6s var(--ease-gentle);
-}
-
-.scale-in {
-  animation: scaleIn 0.5s var(--ease-gentle);
-}
+.fade-in { animation: fadeIn 0.6s var(--ease-gentle); }
+.slide-in-left { animation: slideInLeft 0.6s var(--ease-gentle); }
+.slide-in-right { animation: slideInRight 0.6s var(--ease-gentle); }
 
 /* Delays para animaciones escalonadas */
 .delay-1 { animation-delay: 0.1s; }
@@ -1556,38 +1772,298 @@ header.bg-white:hover::before {
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
 
-/* ========== Elementos Especiales con Gradiente ========== */
-.card-primary {
-  background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 163, 204, 0.05) 100%);
-  border-color: rgba(0, 102, 204, 0.2);
+/* ========== Tooltips Mejorados ========== */
+.tooltip-inner {
+  background: rgba(31, 51, 82, 0.96);
+  backdrop-filter: var(--blur-md);
+  border-radius: var(--border-radius-md);
+  padding: 0.625rem 1rem;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: 250px;
 }
 
-.card-secondary {
-  background: linear-gradient(135deg, rgba(0, 163, 204, 0.05) 0%, rgba(0, 204, 153, 0.05) 100%);
-  border-color: rgba(0, 163, 204, 0.2);
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: rgba(31, 51, 82, 0.96);
 }
 
-.card-tertiary {
-  background: linear-gradient(135deg, rgba(0, 204, 153, 0.05) 0%, rgba(51, 214, 173, 0.05) 100%);
-  border-color: rgba(0, 204, 153, 0.2);
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: rgba(31, 51, 82, 0.96);
 }
 
-/* ========== Bordes con Gradiente ========== */
-.border-gradient-primary {
-  border: 2px solid transparent;
-  background-image: linear-gradient(white, white), var(--gradient-primary);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: rgba(31, 51, 82, 0.96);
 }
 
-.border-gradient-secondary {
-  border: 2px solid transparent;
-  background-image: linear-gradient(white, white), var(--gradient-secondary);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: rgba(31, 51, 82, 0.96);
 }
 
-/* ========== Estados Interactivos Cohesivos ========== */
+/* ========== Breadcrumbs Mejorados ========== */
+.breadcrumb {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: var(--blur-md);
+  border-radius: var(--border-radius-lg);
+  padding: 0.875rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb-item {
+  color: var(--gray-600);
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.breadcrumb-item.active {
+  color: var(--medical-primary);
+  font-weight: 600;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--gray-400);
+  content: "›";
+  font-size: 1.125rem;
+  padding: 0 0.5rem;
+}
+
+.breadcrumb-item a {
+  color: var(--medical-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--medical-primary-dark);
+  text-decoration: underline;
+}
+
+/* ========== Pagination Mejorada ========== */
+.pagination {
+  gap: 0.5rem;
+}
+
+.page-link {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--blur-sm);
+  border: 1px solid rgba(205, 224, 237, 0.6);
+  border-radius: var(--border-radius-md);
+  color: var(--gray-700);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.625rem 1rem;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-xs);
+  line-height: 1.4;
+}
+
+.page-link:hover {
+  background: rgba(0, 102, 204, 0.08);
+  color: var(--medical-primary);
+  border-color: rgba(0, 102, 204, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-item.active .page-link {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+
+.page-item.disabled .page-link {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--gray-400);
+  border-color: rgba(205, 224, 237, 0.4);
+  cursor: not-allowed;
+}
+
+/* ========== List Groups Mejorados - SIN TRANSFORM ========== */
+.list-group {
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.list-group-item {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--blur-sm);
+  border: none;
+  border-bottom: 1px solid rgba(205, 224, 237, 0.5);
+  color: var(--gray-700);
+  padding: 1.125rem 1.5rem;
+  transition: background-color var(--transition-fast), padding-left var(--transition-fast), box-shadow var(--transition-fast);
+  font-size: 1rem;
+  line-height: 1.5;
+  will-change: background-color, padding-left;
+}
+
+.list-group-item:hover {
+  background: rgba(0, 102, 204, 0.05);
+  padding-left: 1.75rem;
+  box-shadow: inset 4px 0 0 var(--medical-primary);
+}
+
+.list-group-item.active {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-primary);
+  border-color: transparent;
+}
+
+.list-group-item:first-child {
+  border-top: none;
+  border-top-left-radius: var(--border-radius-xl);
+  border-top-right-radius: var(--border-radius-xl);
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+  border-bottom-left-radius: var(--border-radius-xl);
+  border-bottom-right-radius: var(--border-radius-xl);
+}
+
+/* ========== Accordion Mejorado ========== */
+.accordion {
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+}
+
+.accordion-item {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--blur-md);
+  border: 1px solid rgba(205, 224, 237, 0.6);
+  margin-bottom: 0.875rem;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-item:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.accordion-button {
+  background: transparent;
+  color: var(--gray-800);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  padding: 1.25rem 1.5rem;
+  transition: all var(--transition-base);
+  line-height: 1.5;
+}
+
+.accordion-button:not(.collapsed) {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(0, 163, 204, 0.08) 100%);
+  color: var(--medical-primary);
+  box-shadow: none;
+  font-weight: 700;
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.12);
+  border-color: rgba(0, 102, 204, 0.25);
+  z-index: 3;
+}
+
+.accordion-button::after {
+  background-size: 1.125rem;
+  transition: all var(--transition-base);
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(-180deg);
+}
+
+.accordion-body {
+  padding: 1.25rem 1.5rem;
+  color: var(--gray-700);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* ========== Tabs Mejoradas ========== */
+.nav-tabs {
+  border-bottom: 2px solid rgba(205, 224, 237, 0.6);
+  gap: 0.5rem;
+}
+
+.nav-tabs .nav-link {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: var(--blur-sm);
+  border: 1px solid rgba(205, 224, 237, 0.6);
+  border-bottom: none;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  color: var(--gray-700);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem 1.75rem;
+  transition: all var(--transition-base);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.nav-tabs .nav-link:hover {
+  background: rgba(0, 102, 204, 0.08);
+  color: var(--medical-primary);
+  border-color: rgba(0, 102, 204, 0.25);
+}
+
+.nav-tabs .nav-link.active {
+  background: white;
+  color: var(--medical-primary);
+  font-weight: 700;
+  border-color: rgba(0, 102, 204, 0.25);
+  border-bottom: 3px solid var(--medical-primary);
+  margin-bottom: -2px;
+}
+
+.tab-content {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--blur-md);
+  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) var(--border-radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-md);
+}
+
+.tab-pane {
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+/* ========== Spinners de Carga Mejorados ========== */
+.spinner-border {
+  border-color: rgba(0, 102, 204, 0.25);
+  border-right-color: var(--medical-primary);
+  border-width: 3px;
+}
+
+.spinner-grow {
+  background-color: var(--medical-primary);
+}
+
+.spinner-border-sm {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-width: 2px;
+}
+
+.spinner-grow-sm {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* ========== Elementos Interactivos ========== */
 .hover-lift {
   transition: all var(--transition-base);
 }
@@ -1603,8 +2079,8 @@ header.bg-white:hover::before {
 
 .hover-glow-primary:hover {
   box-shadow: 
-    0 0 0 3px rgba(0, 102, 204, 0.1),
-    0 8px 24px rgba(0, 102, 204, 0.2);
+    0 0 0 4px rgba(0, 102, 204, 0.12),
+    0 8px 24px rgba(0, 102, 204, 0.22);
 }
 
 .hover-glow-secondary {
@@ -1613,79 +2089,8 @@ header.bg-white:hover::before {
 
 .hover-glow-secondary:hover {
   box-shadow: 
-    0 0 0 3px rgba(0, 163, 204, 0.1),
-    0 8px 24px rgba(0, 163, 204, 0.2);
-}
-
-/* ========== Print Styles ========== */
-@media print {
-  body::before,
-  body::after {
-    display: none;
-  }
-  
-  .card,
-  .navbar,
-  header,
-  .table {
-    background: white !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-  }
-  
-  .btn,
-  .badge {
-    box-shadow: none !important;
-  }
-  
-  .nav-link,
-  .dropdown-item {
-    color: black !important;
-  }
-}
-
-/* ========== Accesibilidad ========== */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Focus visible para navegación por teclado */
-:focus-visible {
-  outline: 3px solid var(--medical-primary);
-  outline-offset: 2px;
-  border-radius: var(--border-radius-sm);
-}
-
-/* ========== Sistema de Iconos Temáticos ========== */
-.icon-primary {
-  color: var(--medical-primary);
-  filter: drop-shadow(0 2px 8px rgba(0, 102, 204, 0.2));
-}
-
-.icon-secondary {
-  color: var(--medical-secondary);
-  filter: drop-shadow(0 2px 8px rgba(0, 163, 204, 0.2));
-}
-
-.icon-tertiary {
-  color: var(--medical-tertiary);
-  filter: drop-shadow(0 2px 8px rgba(0, 204, 153, 0.2));
-}
-
-.icon-critical {
-  color: var(--status-critical);
-  filter: drop-shadow(0 2px 8px rgba(204, 51, 51, 0.2));
-}
-
-.icon-warning {
-  color: var(--accent-warm);
-  filter: drop-shadow(0 2px 8px rgba(255, 153, 51, 0.2));
+    0 0 0 4px rgba(0, 163, 204, 0.12),
+    0 8px 24px rgba(0, 163, 204, 0.22);
 }
 
 /* ========== Divisores Decorativos ========== */
@@ -1705,11 +2110,380 @@ header.bg-white:hover::before {
   border-radius: var(--border-radius-full);
 }
 
-/* ========== Overlays Temáticos ========== */
-.overlay-primary {
-  background: linear-gradient(135deg, rgba(0, 102, 204, 0.9) 0%, rgba(0, 163, 204, 0.85) 100%);
+/* ========== Sistema de Iconos Temáticos ========== */
+.icon-primary {
+  color: var(--medical-primary);
+  filter: drop-shadow(0 2px 8px rgba(0, 102, 204, 0.22));
 }
 
-.overlay-secondary {
-  background: linear-gradient(135deg, rgba(0, 163, 204, 0.9) 0%, rgba(0, 204, 153, 0.85) 100%);
+.icon-secondary {
+  color: var(--medical-secondary);
+  filter: drop-shadow(0 2px 8px rgba(0, 163, 204, 0.22));
+}
+
+.icon-tertiary {
+  color: var(--medical-tertiary);
+  filter: drop-shadow(0 2px 8px rgba(0, 204, 153, 0.22));
+}
+
+.icon-critical {
+  color: var(--status-critical);
+  filter: drop-shadow(0 2px 8px rgba(220, 53, 69, 0.22));
+}
+
+.icon-warning {
+  color: var(--accent-warm);
+  filter: drop-shadow(0 2px 8px rgba(255, 153, 51, 0.22));
+}
+
+/* ========== Cards con Variantes de Color ========== */
+.card-primary {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 163, 204, 0.06) 100%);
+  border-color: rgba(0, 102, 204, 0.25);
+}
+
+.card-secondary {
+  background: linear-gradient(135deg, rgba(0, 163, 204, 0.06) 0%, rgba(0, 204, 153, 0.06) 100%);
+  border-color: rgba(0, 163, 204, 0.25);
+}
+
+.card-tertiary {
+  background: linear-gradient(135deg, rgba(0, 204, 153, 0.06) 0%, rgba(51, 214, 173, 0.06) 100%);
+  border-color: rgba(0, 204, 153, 0.25);
+}
+
+.card-success {
+  background: linear-gradient(135deg, rgba(0, 204, 153, 0.08) 0%, rgba(51, 214, 173, 0.08) 100%);
+  border-color: rgba(0, 204, 153, 0.3);
+}
+
+.card-warning {
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.08) 0%, rgba(255, 173, 92, 0.08) 100%);
+  border-color: rgba(255, 153, 51, 0.3);
+}
+
+.card-danger {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
+  border-color: rgba(220, 53, 69, 0.3);
+}
+
+/* ========== Input Groups Mejorados ========== */
+.input-group {
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+.input-group-text {
+  background: rgba(0, 102, 204, 0.08);
+  border: 2px solid var(--gray-200);
+  color: var(--gray-700);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.875rem 1.25rem;
+  transition: all var(--transition-base);
+}
+
+.input-group:focus-within .input-group-text {
+  border-color: var(--medical-primary);
+  background: rgba(0, 102, 204, 0.12);
+  color: var(--medical-primary);
+}
+
+/* ========== Checkboxes y Radios Mejorados ========== */
+.form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--gray-300);
+  border-radius: 0.375rem;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: var(--medical-primary);
+  border-color: var(--medical-primary);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+.form-check-input:focus {
+  border-color: var(--medical-primary);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.12);
+}
+
+.form-check-label {
+  font-size: 1rem;
+  color: var(--gray-700);
+  font-weight: 500;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.form-switch .form-check-input {
+  width: 2.5rem;
+  height: 1.375rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--gray-300);
+  border: none;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--medical-primary);
+}
+
+/* ========== Offcanvas Mejorado ========== */
+.offcanvas {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: var(--blur-xl) saturate(180%);
+  -webkit-backdrop-filter: var(--blur-xl) saturate(180%);
+  border: none;
+  box-shadow: -8px 0 32px rgba(0, 51, 102, 0.15);
+}
+
+.offcanvas-header {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 163, 204, 0.06) 100%);
+  border-bottom: 1px solid rgba(205, 224, 237, 0.5);
+  padding: 1.5rem 1.75rem;
+}
+
+.offcanvas-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--medical-primary);
+}
+
+.offcanvas-body {
+  padding: 1.75rem;
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+/* ========== Popovers Mejorados ========== */
+.popover {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: var(--blur-lg) saturate(180%);
+  -webkit-backdrop-filter: var(--blur-lg) saturate(180%);
+  border: 1px solid rgba(205, 224, 237, 0.6);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  max-width: 320px;
+}
+
+.popover-header {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 163, 204, 0.06) 100%);
+  border-bottom: 1px solid rgba(205, 224, 237, 0.5);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+  padding: 0.875rem 1.125rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gray-900);
+}
+
+.popover-body {
+  padding: 1rem 1.125rem;
+  font-size: 0.9375rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+/* ========== Collapse Mejorado ========== */
+.collapse {
+  transition: height var(--transition-slow), opacity var(--transition-base);
+}
+
+.collapsing {
+  transition: height var(--transition-slow), opacity var(--transition-base);
+}
+
+/* ========== Carousel Mejorado ========== */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 4rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border-radius: var(--border-radius-lg);
+  margin: 0 1rem;
+  transition: all var(--transition-base);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--border-radius-full);
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  transition: all var(--transition-base);
+}
+
+.carousel-indicators [data-bs-target].active {
+  width: 2rem;
+  background-color: white;
+}
+
+/* ========== Accesibilidad Mejorada ========== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--medical-primary);
+  outline-offset: 3px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Skip to content link para navegación por teclado */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--medical-primary);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top var(--transition-base);
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+/* ========== Print Styles ========== */
+@media print {
+  body::before,
+  body::after {
+    display: none !important;
+  }
+  
+  .card,
+  .navbar,
+  header,
+  .table,
+  .modal-content,
+  .dropdown-menu {
+    background: white !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  .btn,
+  .badge {
+    box-shadow: none !important;
+  }
+  
+  .nav-link,
+  .dropdown-item {
+    color: black !important;
+  }
+  
+  /* Ocultar elementos no necesarios en impresión */
+  .no-print,
+  .nav-link .bi-bell,
+  #notifBadge,
+  .toast {
+    display: none !important;
+  }
+}
+
+/* ========== Modo de alto contraste ========== */
+@media (prefers-contrast: high) {
+  :root {
+    --gray-700: #1a1a1a;
+    --gray-800: #000000;
+    --gray-900: #000000;
+  }
+  
+  .card,
+  .navbar,
+  header,
+  .dropdown-menu,
+  .modal-content {
+    border-width: 2px;
+    border-color: var(--gray-900);
+  }
+  
+  .btn {
+    border-width: 3px !important;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    border-width: 3px;
+  }
+}
+
+/* ========== Utilidades de Espaciado Adicionales ========== */
+.p-responsive {
+  padding: var(--spacing-md);
+}
+
+.px-responsive {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.py-responsive {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+.m-responsive {
+  margin: var(--spacing-md);
+}
+
+.mx-responsive {
+  margin-left: var(--spacing-md);
+  margin-right: var(--spacing-md);
+}
+
+.my-responsive {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ========== Estados de Carga ========== */
+.loading-skeleton {
+  background: linear-gradient(90deg, 
+    rgba(205, 224, 237, 0.3) 0%, 
+    rgba(205, 224, 237, 0.5) 50%, 
+    rgba(205, 224, 237, 0.3) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: var(--border-radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ========== Text Selection ========== */
+::selection {
+  background: rgba(0, 102, 204, 0.25);
+  color: var(--gray-900);
+}
+
+::-moz-selection {
+  background: rgba(0, 102, 204, 0.25);
+  color: var(--gray-900);
 }

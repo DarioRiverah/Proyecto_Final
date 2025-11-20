@@ -1,449 +1,438 @@
 <!doctype html>
 <html lang="es" data-bs-theme="light">
+
 <head>
   <meta charset="utf-8">
   <title>{% block title %}PDS-006{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
   <!-- CSRF para AJAX -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Estilos propios -->
-  <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/base.css') }}">
-  <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/custom.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
   {% block head_extra %}{% endblock %}
 </head>
 
 <body class="bg-light d-flex flex-column min-vh-100">
 
-<header class="bg-white border-bottom">
-  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
-    <!-- Logo + info universidad -->
-    <div class="d-flex align-items-center gap-3">
-      <a href="{{ url_for('index') }}"
-         class="d-flex align-items-center gap-3 text-decoration-none text-dark">
-        <img src="{{ url_for('static', filename='img/logo.png') }}"
-             alt="Logo USTA"
-             class="usta-logo">
-        <div class="small">
-          <div class="fw-semibold text-uppercase mb-0">Universidad Santo Tomás</div>
-          <div class="text-muted">
-            Electiva Seguridad en el desarrollo de software - 2025-2
+  <header class="bg-white border-bottom">
+    <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <!-- Logo + info universidad -->
+      <div class="d-flex align-items-center gap-3">
+        <a href="{{ url_for('index') }}" class="d-flex align-items-center gap-3 text-decoration-none text-dark">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo USTA" class="usta-logo">
+          <div class="small">
+            <div class="fw-semibold text-uppercase mb-0">Universidad Santo Tomás</div>
+            <div class="text-muted">
+              Electiva Seguridad en el desarrollo de software - 2025-2
+            </div>
           </div>
-        </div>
+        </a>
+      </div>
+
+      <!-- Info proyecto -->
+      <div class="text-muted small text-end d-none d-md-block">
+        <div class="fw-semibold">PDS-006</div>
+        <div>Sistema para control de ingreso de equipos tecnológicos y biomédicos externos</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-semibold"
+        href="{{ url_for('dashboard') if current_user.is_authenticated else url_for('login') }}">
+        PDS-006
       </a>
-    </div>
 
-    <!-- Info proyecto -->
-    <div class="text-muted small text-end d-none d-md-block">
-      <div class="fw-semibold">PDS-006</div>
-      <div>Sistema para control de ingreso de equipos tecnológicos y biomédicos externos</div>
-    </div>
-  </div>
-</header>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"
+        aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-semibold"
-       href="{{ url_for('dashboard') if current_user.is_authenticated else url_for('login') }}">
-      PDS-006
-    </a>
+      <div class="collapse navbar-collapse" id="navMain">
+        {% if current_user.is_authenticated %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navMain"
-            aria-controls="navMain" aria-expanded="false"
-            aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navMain">
-      {% if current_user.is_authenticated %}
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-        {# ===== INICIO ===== #}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle
+          {# ===== INICIO ===== #}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle
                     {% if request.endpoint in ['dashboard','perfil','reportes','my_audit','self_edit_profile'] %}active{% endif %}"
-             href="#" id="menuInicio" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Inicio
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="menuInicio">
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'dashboard' %}active{% endif %}"
-                 href="{{ url_for('dashboard') }}">
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'perfil' %}active{% endif %}"
-                 href="{{ url_for('perfil') }}">
-                Perfil
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'reportes' %}active{% endif %}"
-                 href="{{ url_for('reportes') }}">
-                Reportes
-              </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint in ['self_edit_profile','my_audit'] %}active{% endif %}"
-                 href="{{ url_for('self_edit_profile') }}">
-                Editar mi perfil / Auditoría
-              </a>
-            </li>
-          </ul>
-        </li>
+              href="#" id="menuInicio" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Inicio
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="menuInicio">
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'dashboard' %}active{% endif %}"
+                  href="{{ url_for('dashboard') }}">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'perfil' %}active{% endif %}"
+                  href="{{ url_for('perfil') }}">
+                  Perfil
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'reportes' %}active{% endif %}"
+                  href="{{ url_for('reportes') }}">
+                  Reportes
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint in ['self_edit_profile','my_audit'] %}active{% endif %}"
+                  href="{{ url_for('self_edit_profile') }}">
+                  Editar mi perfil / Auditoría
+                </a>
+              </li>
+            </ul>
+          </li>
 
-        {# ===== EQUIPOS ===== #}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle
+          {# ===== EQUIPOS ===== #}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle
                     {% if request.endpoint in [
                         'equipos_index','equipos_show',
                         'equipos_create','equipos_edit',
                         'equipos_eliminados',
                         'audit_equipos_admin','audit_equipo_show'
-                      ] %}active{% endif %}"
-             href="#" id="menuEquipos" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Equipos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="menuEquipos">
-            <li>
-              <a class="dropdown-item {% if request.endpoint in ['equipos_index','equipos_show'] %}active{% endif %}"
-                 href="{{ url_for('equipos_index') }}">
-                Listado de equipos
-              </a>
-            </li>
+                      ] %}active{% endif %}" href="#" id="menuEquipos" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Equipos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="menuEquipos">
+              <li>
+                <a class="dropdown-item {% if request.endpoint in ['equipos_index','equipos_show'] %}active{% endif %}"
+                  href="{{ url_for('equipos_index') }}">
+                  Listado de equipos
+                </a>
+              </li>
 
-            {% if current_user.role == 'admin' %}
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'equipos_create' %}active{% endif %}"
-                 href="{{ url_for('equipos_create') }}">
-                Nuevo equipo
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'equipos_edit' %}active{% endif %}"
-                 href="{{ url_for('equipos_index') }}">
-                Editar / gestionar
-              </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li class="dropdown-header small text-muted">Histórico</li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'equipos_eliminados' %}active{% endif %}"
-                 href="{{ url_for('equipos_eliminados') }}">
-                Equipos eliminados
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint in ['audit_equipos_admin','audit_equipo_show'] %}active{% endif %}"
-                 href="{{ url_for('audit_equipos_admin') }}">
-                Auditoría de equipos
-              </a>
-            </li>
-            {% endif %}
-          </ul>
-        </li>
+              {% if current_user.role == 'admin' %}
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'equipos_create' %}active{% endif %}"
+                  href="{{ url_for('equipos_create') }}">
+                  Nuevo equipo
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'equipos_edit' %}active{% endif %}"
+                  href="{{ url_for('equipos_index') }}">
+                  Editar / gestionar
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="dropdown-header small text-muted">Histórico</li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'equipos_eliminados' %}active{% endif %}"
+                  href="{{ url_for('equipos_eliminados') }}">
+                  Equipos eliminados
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint in ['audit_equipos_admin','audit_equipo_show'] %}active{% endif %}"
+                  href="{{ url_for('audit_equipos_admin') }}">
+                  Auditoría de equipos
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </li>
 
-        {# ===== CATÁLOGOS ===== #}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle
-                    {% if request.endpoint in ['empresas_index','responsables_index'] %}active{% endif %}"
-             href="#" id="menuCatalogos" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Catálogos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="menuCatalogos">
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'empresas_index' %}active{% endif %}"
-                 href="{{ url_for('empresas_index') }}">
-                Empresas externas
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'responsables_index' %}active{% endif %}"
-                 href="{{ url_for('responsables_index') }}">
-                Responsables de entrega
-              </a>
-            </li>
-          </ul>
-        </li>
+          {# ===== CATÁLOGOS ===== #}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle
+                    {% if request.endpoint in ['empresas_index','responsables_index'] %}active{% endif %}" href="#"
+              id="menuCatalogos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Catálogos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="menuCatalogos">
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'empresas_index' %}active{% endif %}"
+                  href="{{ url_for('empresas_index') }}">
+                  Empresas externas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'responsables_index' %}active{% endif %}"
+                  href="{{ url_for('responsables_index') }}">
+                  Responsables de entrega
+                </a>
+              </li>
+            </ul>
+          </li>
 
-        {# ===== ADMINISTRACIÓN ===== #}
-        {% if current_user.role == 'admin' %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle
+          {# ===== ADMINISTRACIÓN ===== #}
+          {% if current_user.role == 'admin' %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle
                     {% if request.endpoint in [
                         'users_index','users_create','users_edit',
                         'audit_admin','audit_admin_mine','audit_deleted',
                         'audit_empresas_admin','empresas_eliminadas',
                         'audit_responsables_admin','responsables_eliminados'
-                      ] %}active{% endif %}"
-             href="#" id="menuAdmin" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Administración
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="menuAdmin">
-            <li class="dropdown-header small text-muted">Usuarios</li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'users_index' %}active{% endif %}"
-                 href="{{ url_for('users_index') }}">
-                Gestión de usuarios
-              </a>
-            </li>
+                      ] %}active{% endif %}" href="#" id="menuAdmin" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Administración
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="menuAdmin">
+              <li class="dropdown-header small text-muted">Usuarios</li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'users_index' %}active{% endif %}"
+                  href="{{ url_for('users_index') }}">
+                  Gestión de usuarios
+                </a>
+              </li>
 
-            <li><hr class="dropdown-divider"></li>
-            <li class="dropdown-header small text-muted">Auditoría de usuarios</li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'audit_admin' %}active{% endif %}"
-                 href="{{ url_for('audit_admin') }}">
-                Auditoría general
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'audit_admin_mine' %}active{% endif %}"
-                 href="{{ url_for('audit_admin_mine') }}">
-                Mis acciones
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'audit_deleted' %}active{% endif %}"
-                 href="{{ url_for('audit_deleted') }}">
-                Usuarios eliminados
-              </a>
-            </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="dropdown-header small text-muted">Auditoría de usuarios</li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'audit_admin' %}active{% endif %}"
+                  href="{{ url_for('audit_admin') }}">
+                  Auditoría general
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'audit_admin_mine' %}active{% endif %}"
+                  href="{{ url_for('audit_admin_mine') }}">
+                  Mis acciones
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'audit_deleted' %}active{% endif %}"
+                  href="{{ url_for('audit_deleted') }}">
+                  Usuarios eliminados
+                </a>
+              </li>
 
-            <li><hr class="dropdown-divider"></li>
-            <li class="dropdown-header small text-muted">Empresas y responsables</li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'audit_empresas_admin' %}active{% endif %}"
-                 href="{{ url_for('audit_empresas_admin') }}">
-                Auditoría de empresas
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'empresas_eliminadas' %}active{% endif %}"
-                 href="{{ url_for('empresas_eliminadas') }}">
-                Empresas eliminadas
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'audit_responsables_admin' %}active{% endif %}"
-                 href="{{ url_for('audit_responsables_admin') }}">
-                Auditoría de responsables
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item {% if request.endpoint == 'responsables_eliminados' %}active{% endif %}"
-                 href="{{ url_for('responsables_eliminados') }}">
-                Responsables eliminados
-              </a>
-            </li>
-          </ul>
-        </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="dropdown-header small text-muted">Empresas y responsables</li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'audit_empresas_admin' %}active{% endif %}"
+                  href="{{ url_for('audit_empresas_admin') }}">
+                  Auditoría de empresas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'empresas_eliminadas' %}active{% endif %}"
+                  href="{{ url_for('empresas_eliminadas') }}">
+                  Empresas eliminadas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'audit_responsables_admin' %}active{% endif %}"
+                  href="{{ url_for('audit_responsables_admin') }}">
+                  Auditoría de responsables
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if request.endpoint == 'responsables_eliminados' %}active{% endif %}"
+                  href="{{ url_for('responsables_eliminados') }}">
+                  Responsables eliminados
+                </a>
+              </li>
+            </ul>
+          </li>
+          {% endif %}
+        </ul>
         {% endif %}
-      </ul>
-      {% endif %}
 
-      {# ===== DERECHA: notificaciones + login/logout ===== #}
-      {% if current_user.is_authenticated %}
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        {# ===== DERECHA: notificaciones + login/logout ===== #}
+        {% if current_user.is_authenticated %}
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
 
-        <!-- Campanita -->
-        <li class="nav-item dropdown me-2">
-          <a class="nav-link position-relative" href="#" id="notifDropdown"
-             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-bell"></i>
-            <span id="notifBadge"
-                  class="position-absolute top-0 start-100 badge rounded-pill bg-danger d-none">
-              0
-            </span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="notifDropdown" style="min-width: 320px;">
-            <li class="dropdown-header d-flex justify-content-between align-items-center">
-              <span>Notificaciones</span>
-              <div class="d-flex align-items-center gap-2">
-                <button type="button"
-                        id="markAllReadBtn"
-                        class="btn btn-link btn-sm p-0 text-decoration-none">
-                  Marcar todas
-                </button>
-                <a class="small" href="{{ url_for('notifications_page') }}">Ver todas</a>
-              </div>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li id="notifList">
-              <div class="px-3 py-2 text-muted small">Cargando…</div>
-            </li>
-          </ul>
-        </li>
+          <!-- Campanita -->
+          <li class="nav-item dropdown me-2">
+            <a class="nav-link" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <span style="position: relative; display: inline-block;">
+                <i class="bi bi-bell"></i>
+                <span id="notifBadge" class="d-none">0</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notifDropdown" style="min-width: 320px;">
+              <li class="dropdown-header d-flex justify-content-between align-items-center">
+                <span>Notificaciones</span>
+                <div class="d-flex align-items-center gap-2">
+                  <button type="button" id="markAllReadBtn" class="btn btn-link btn-sm p-0 text-decoration-none">
+                    Marcar todas
+                  </button>
+                  <a class="small" href="{{ url_for('notifications_page') }}">Ver todas</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li id="notifList">
+                <div class="px-3 py-2 text-muted small">Cargando…</div>
+              </li>
+            </ul>
+          </li>
 
-        <!-- Salir -->
-        <li class="nav-item">
-          <form class="d-flex" method="POST" action="{{ url_for('logout') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <button class="btn btn-outline-secondary btn-sm" type="submit">
-              Salir
-            </button>
-          </form>
-        </li>
-      </ul>
-      {% else %}
+          <!-- Salir -->
+          <li class="nav-item">
+            <form class="d-flex" method="POST" action="{{ url_for('logout') }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-outline-secondary btn-sm" type="submit">
+                Salir
+              </button>
+            </form>
+          </li>
+        </ul>
+        {% else %}
         <a class="btn btn-primary btn-sm ms-auto" href="{{ url_for('login') }}">Login</a>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main class="container my-4 flex-grow-1">
-  {% block content %}{% endblock %}
-</main>
+  <main class="container my-4 flex-grow-1">
+    {% block content %}{% endblock %}
+  </main>
 
-<footer class="mt-auto border-top bg-body-tertiary">
-  <div class="container py-3 small text-muted d-flex flex-column flex-sm-row
+  <footer class="mt-auto border-top bg-body-tertiary">
+    <div class="container py-3 small text-muted d-flex flex-column flex-sm-row
               justify-content-between align-items-center gap-2">
 
-    <div class="text-center text-sm-start">
-      <span class="fw-semibold">
-        <i class="bi bi-shield-lock me-1"></i>PDS-006
-      </span>
-      <span class="d-block d-sm-inline ms-sm-2">
-        Sistema para control de ingreso de equipos tecnológicos y biomédicos externos
-      </span>
-    </div>
+      <div class="text-center text-sm-start">
+        <span class="fw-semibold">
+          <i class="bi bi-shield-lock me-1"></i>PDS-006
+        </span>
+        <span class="d-block d-sm-inline ms-sm-2">
+          Sistema para control de ingreso de equipos tecnológicos y biomédicos externos
+        </span>
+      </div>
 
-    <div class="text-center text-sm-end">
-      <span class="me-2">
-        <i class="bi bi-building"></i> USTA 2025
-      </span>
-      <span class="d-none d-md-inline">
-        <i class="bi bi-lock-fill"></i> Seguridad en el desarrollo de software
-      </span>
+      <div class="text-center text-sm-end">
+        <span class="me-2">
+          <i class="bi bi-building"></i> USTA 2025
+        </span>
+        <span class="d-none d-md-inline">
+          <i class="bi bi-lock-fill"></i> Seguridad en el desarrollo de software
+        </span>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-{# Toasters para flash messages (abajo a la derecha) #}
-{% with messages = get_flashed_messages(with_categories=true) %}
+  {# Toasters para flash messages (abajo a la derecha) #}
+  {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 2000;">
-      {% for category, message in messages %}
-        {% set hdr = {
-          "success":"Éxito",
-          "danger":"Error",
-          "warning":"Aviso",
-          "info":"Información"
-        }.get(category, "Mensaje") %}
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 2000;">
+    {% for category, message in messages %}
+    {% set hdr = {
+    "success":"Éxito",
+    "danger":"Error",
+    "warning":"Aviso",
+    "info":"Información"
+    }.get(category, "Mensaje") %}
 
-        {% set header_bg = {
-          "success":"bg-success text-black",
-          "danger":"bg-danger text-black",
-          "warning":"bg-warning-subtle text-dark",
-          "info":"bg-info-subtle text-dark"
-        }.get(category, "bg-body-secondary text-dark") %}
+    {% set header_bg = {
+    "success":"bg-success text-black",
+    "danger":"bg-danger text-black",
+    "warning":"bg-warning-subtle text-dark",
+    "info":"bg-info-subtle text-dark"
+    }.get(category, "bg-body-secondary text-dark") %}
 
-        <div class="toast shadow-sm mb-2"
-             role="alert" aria-live="assertive" aria-atomic="true"
-             data-bs-delay="4500">
-          <div class="toast-header {{ header_bg }}">
-            <strong class="me-auto">{{ hdr }}</strong>
-            <small>ahora</small>
-            <button type="button"
-                    class="btn-close {% if 'text-black' in header_bg %}btn-close-black{% endif %}"
-                    data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            {{ message }}
-          </div>
-        </div>
-      {% endfor %}
+    <div class="toast shadow-sm mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4500">
+      <div class="toast-header {{ header_bg }}">
+        <strong class="me-auto">{{ hdr }}</strong>
+        <small>ahora</small>
+        <button type="button" class="btn-close {% if 'text-black' in header_bg %}btn-close-black{% endif %}"
+          data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        {{ message }}
+      </div>
     </div>
+    {% endfor %}
+  </div>
   {% endif %}
-{% endwith %}
+  {% endwith %}
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-  // Mostrar automáticamente los toasts de flash
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.toast').forEach(function (t) {
-      new bootstrap.Toast(t).show();
+  <script>
+    // Mostrar automáticamente los toasts de flash
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.toast').forEach(function (t) {
+        new bootstrap.Toast(t).show();
+      });
     });
-  });
-</script>
+  </script>
 
-{% if current_user.is_authenticated %}
-<!-- Script de notificaciones -->
-<script>
-async function fetchJSON(url) {
-  const res = await fetch(url, { credentials: "same-origin" });
-  if (!res.ok) throw new Error("HTTP " + res.status);
-  return res.json();
-}
-
-function csrfToken() {
-  const m = document.querySelector('meta[name="csrf-token"]');
-  return m ? m.getAttribute("content") : "";
-}
-
-async function refreshNotifBadge() {
-  try {
-    const { count } = await fetchJSON("{{ url_for('api_notifs_unread_count') }}");
-    const badge = document.getElementById("notifBadge");
-    if (!badge) return;
-    if (count > 0) {
-      badge.textContent = count;
-      badge.classList.remove("d-none");
-    } else {
-      badge.classList.add("d-none");
-    }
-  } catch (e) {
-    // silencioso
-  }
-}
-
-async function loadNotifDropdown() {
-  try {
-    const data = await fetchJSON("{{ url_for('api_notifs_list') }}");
-    const list = document.getElementById("notifList");
-    if (!list) return;
-
-    if (!data.length) {
-      list.innerHTML = '<div class="px-3 py-2 text-muted small">Sin notificaciones</div>';
-      return;
+  {% if current_user.is_authenticated %}
+  <!-- Script de notificaciones -->
+  <script>
+    async function fetchJSON(url) {
+      const res = await fetch(url, { credentials: "same-origin" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
     }
 
-    const items = data.slice(0, 6).map(n => {
-      const level = ({
-        success: "text-success",
-        warning: "text-warning",
-        danger:  "text-danger",
-        info:    "text-primary"
-      })[n.level] || "text-secondary";
+    function csrfToken() {
+      const m = document.querySelector('meta[name="csrf-token"]');
+      return m ? m.getAttribute("content") : "";
+    }
 
-      const fecha = new Date(n.created_at);
-      const fechaStr = fecha.toLocaleString("es-CO", { timeZone: "America/Bogota" });
+    async function refreshNotifBadge() {
+      try {
+        const { count } = await fetchJSON("{{ url_for('api_notifs_unread_count') }}");
+        const badge = document.getElementById("notifBadge");
+        if (!badge) return;
+        if (count > 0) {
+          badge.textContent = count;
+          badge.classList.remove("d-none");
+        } else {
+          badge.classList.add("d-none");
+        }
+      } catch (e) {
+        // silencioso
+      }
+    }
 
-      return `
+    async function loadNotifDropdown() {
+      try {
+        const data = await fetchJSON("{{ url_for('api_notifs_list') }}");
+        const list = document.getElementById("notifList");
+        if (!list) return;
+
+        if (!data.length) {
+          list.innerHTML = '<div class="px-3 py-2 text-muted small">Sin notificaciones</div>';
+          return;
+        }
+
+        const items = data.slice(0, 6).map(n => {
+          const level = ({
+            success: "text-success",
+            warning: "text-warning",
+            danger: "text-danger",
+            info: "text-primary"
+          })[n.level] || "text-secondary";
+
+          const fecha = new Date(n.created_at);
+          const fechaStr = fecha.toLocaleString("es-CO", { timeZone: "America/Bogota" });
+
+          return `
         <div class="px-3 py-2 border-bottom">
           <div class="d-flex justify-content-between align-items-start">
             <div>
@@ -457,71 +446,72 @@ async function loadNotifDropdown() {
             `}
           </div>
         </div>`;
-    }).join("");
+        }).join("");
 
-    list.innerHTML = items || '<div class="px-3 py-2 text-muted small">Sin notificaciones</div>';
+        list.innerHTML = items || '<div class="px-3 py-2 text-muted small">Sin notificaciones</div>';
 
-    // Marcar leída individual
-    list.querySelectorAll("[data-mark-read]").forEach(btn => {
-      btn.addEventListener("click", async (ev) => {
-        const id = ev.currentTarget.getAttribute("data-mark-read");
-        await fetch(`{{ url_for('notif_mark_read', notif_id=0) }}`.replace("0", id), {
+        // Marcar leída individual
+        list.querySelectorAll("[data-mark-read]").forEach(btn => {
+          btn.addEventListener("click", async (ev) => {
+            const id = ev.currentTarget.getAttribute("data-mark-read");
+            await fetch(`{{ url_for('notif_mark_read', notif_id=0) }}`.replace("0", id), {
+              method: "POST",
+              credentials: "same-origin",
+              headers: {
+                "X-CSRFToken": csrfToken()
+              }
+            });
+            await loadNotifDropdown();
+            await refreshNotifBadge();
+          });
+        });
+
+      } catch (e) {
+        const list = document.getElementById("notifList");
+        if (list) {
+          list.innerHTML = '<div class="px-3 py-2 text-danger small">Error cargando notificaciones</div>';
+        }
+      }
+    }
+
+    async function markAllNotificationsRead() {
+      try {
+        await fetch("{{ url_for('notif_mark_all_read') }}", {
           method: "POST",
           credentials: "same-origin",
           headers: {
+            "X-Requested-With": "XMLHttpRequest",
             "X-CSRFToken": csrfToken()
           }
         });
         await loadNotifDropdown();
         await refreshNotifBadge();
-      });
-    });
-
-  } catch (e) {
-    const list = document.getElementById("notifList");
-    if (list) {
-      list.innerHTML = '<div class="px-3 py-2 text-danger small">Error cargando notificaciones</div>';
+      } catch (e) {
+        console.error("Error marcando todas como leídas", e);
+      }
     }
-  }
-}
 
-async function markAllNotificationsRead() {
-  try {
-    await fetch("{{ url_for('notif_mark_all_read') }}", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-        "X-CSRFToken": csrfToken()
+    document.addEventListener("DOMContentLoaded", () => {
+      refreshNotifBadge();
+      setInterval(refreshNotifBadge, 30000);
+
+      const dd = document.getElementById("notifDropdown");
+      if (dd) {
+        dd.addEventListener("click", loadNotifDropdown, { once: false });
+      }
+
+      const markAllBtn = document.getElementById("markAllReadBtn");
+      if (markAllBtn) {
+        markAllBtn.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          markAllNotificationsRead();
+        });
       }
     });
-    await loadNotifDropdown();
-    await refreshNotifBadge();
-  } catch (e) {
-    console.error("Error marcando todas como leídas", e);
-  }
-}
+  </script>
+  {% endif %}
 
-document.addEventListener("DOMContentLoaded", () => {
-  refreshNotifBadge();
-  setInterval(refreshNotifBadge, 30000);
-
-  const dd = document.getElementById("notifDropdown");
-  if (dd) {
-    dd.addEventListener("click", loadNotifDropdown, { once: false });
-  }
-
-  const markAllBtn = document.getElementById("markAllReadBtn");
-  if (markAllBtn) {
-    markAllBtn.addEventListener("click", (ev) => {
-      ev.preventDefault();
-      markAllNotificationsRead();
-    });
-  }
-});
-</script>
-{% endif %}
-
-{% block body_extra %}{% endblock %}
+  {% block body_extra %}{% endblock %}
 </body>
+
 </html>
